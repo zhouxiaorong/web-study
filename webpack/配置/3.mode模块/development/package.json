@@ -1,0 +1,16 @@
+{
+  "name": "development",
+  "version": "1.0.0",
+  "description": "1. 初始化生成 `package.json` 文件\r   ```\r     npm init -y\r   ```",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
