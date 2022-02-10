@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>背景-径向渐变</title>
+        <style>
+            * {
+                margin: 0px;
+                padding: 0px;
+            }
+
+            body {
+                padding: 10px;
+            }
+
+            .info p strong {
+                width: 100px;
+                text-align: right;
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+            table tr th {
+                border: 1px solid #000;
+                text-align: center;
+                padding: 10px;
+            }
+
+            table tr td {
+                padding: 10px;
+                border: 1px solid #000;
+                text-align: left;
+                padding-right: 50px;
+                vertical-align: top;
+                ;
+            }
+
+            table tr td span {
+                width: 120px;
+                display: inline-block;
+            }
+
+            .grad {
+                display: inline-block;
+                margin: 5px;
+                width: 150px;
+                height: 100px;
+                background-color: red;
+                /* 浏览器不支持的时候显示 */
+                vertical-align: top;
+                text-align: center;
+                color: #888888;
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 100px;
+            }
+
+            #grad1 {
+                background-image: radial-gradient(red, yellow, slateblue);
+                /* background-image: radial-gradient(ellipse,red, yellow, slateblue); ellipse是默认值 */
+            }
+
+            #grad2 {
+                background-image: radial-gradient(circle, red, yellow, slateblue);
+            }
+
+            #grad3 {
+                background-image: radial-gradient(farthest-corner at 60% 55%, red,yellow, slateblue);
+                /* farthest-corner: 默认值，指定径向渐变的半径长度为从圆心到离圆心最远的角*/
+            }
+
+            #grad4 {
+                background-image: radial-gradient(closest-corner at 60% 55%, red, yellow, slateblue);
+                /*指定径向渐变的半径长度为从圆心到离圆心最近的角*/
+            }
+
+            #grad5 {
+                background-image: radial-gradient(closest-side at 60% 55%, red, yellow, slateblue);
+                /*指定径向渐变的半径长度为从圆心到离圆心最近的边*/
+            }
+
+            #grad6 {
+                background-image: radial-gradient(farthest-side at 60% 55%, red, yellow, slateblue);
+                /*：指定径向渐变的半径长度为从圆心到离圆心最远的边*/
+            }
+
+            #grad7 {
+                background-image: radial-gradient(at center,red , yellow, slateblue);
+                /*默认值，设置中间为径向渐变圆心的纵坐标值。*/
+            }
+
+            #grad8 {
+                background-image: radial-gradient(at top, red, yellow, slateblue);
+                /*设置顶部为径向渐变圆心的纵坐标值*/
+            }
+
+            #grad9 {
+                background-image: radial-gradient(at bottom, red, yellow, slateblue);
+                /*设置底部为径向渐变圆心的纵坐标值*/
+            }
+
+            #grad10 {
+                background-image: radial-gradient(farthest-corner at top left, red,yellow, slateblue);
+            }
+
+            #grad11 {
+                background-image: radial-gradient(farthest-side at top left, red, yellow, slateblue);
+            }
+            #grad12 {
+                background-image: radial-gradient(red 5%, yellow 15%, slateblue 60%);
+            }
+            #grad13 {
+                background-image: radial-gradient(farthest-side at 50% bottom,red 5%, yellow 20%, slateblue 50%);
+            }
+            #grad13 {
+                background-image: repeating-radial-gradient(red, yellow 10%, green 15%);
+            }
+        </style>
+    </head>
+
+    <body>
+        <h3>背景颜色-径向渐变 :  由它们的中心定义</h3>
+
+        <h4>确定圆的类型</h4>
+        <div class="grad" id="grad1"></div>
+        <div class="grad" id="grad2"></div>
+        <h4>定义渐变的大小</h4>
+        <div class="grad" id="grad3"></div>
+        <div class="grad" id="grad4"></div>
+        <div class="grad" id="grad5"></div>
+        <div class="grad" id="grad6"></div>
+        <h4>定义渐变的位置</h4>
+        <div class="grad" id="grad7"></div>
+        <div class="grad" id="grad8"></div>
+        <div class="grad" id="grad9"></div>
+        <div class="grad" id="grad10"></div>
+        <div class="grad" id="grad11"></div>
+        <div class="grad" id="grad13"></div>
+        <h4>重复径向渐变</h4>
+        <div class="grad" id="grad14"></div>
+        <h4>其他</h4>
+        <div class="grad" id="grad12"></div>
+
+        <div class="info">
+            <p><strong>注意：</strong></p>
+            <p><strong></strong>Internet Explorer 9 及之前的版本不支持渐变。</p>
+            <p><strong>CSS 语法 </strong></p>
+            <p><strong></strong>background-image: radial-gradient(shape size at position, start-color, ..., last-color);
+            </p>
+            <p><strong>定义与用法</strong></p>
+            <p><strong></strong>radial-gradient() 函数用径向渐变创建 "图像"。</p>
+            <p><strong></strong>径向渐变由中心点定义。</p>
+            <p><strong></strong>为了创建径向渐变你必须设置两个终止色。</p>
+            <p><strong>浏览器支持</strong></p>
+            <p><strong></strong>表格中的数字表示支持该函数的第一个浏览器版本号。</p>
+            <p><strong></strong>指定的数字为支持该函数的第一个版本号前缀。"webkit" 或 "moz" 或 "o" </p>
+            <p><strong></strong>radial-gradient() 26.0</p>
+            <p><strong></strong>10.0 -webkit- 10.0 16.0</p>
+            <p><strong></strong>3.6 -moz- 6.1</p>
+            <p><strong></strong>5.1 -webkit- 12.1</p>
+            <p><strong></strong>11.6 -o-</p>
+
+            <table>
+                <tr>
+                    <th>值</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>shape</td>
+                    <td>
+                        确定圆的类型：<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        ellipse (默认): 指定椭圆形的径向渐变。<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        circle ：指定圆形的径向渐变
+                    </td>
+                </tr>
+                <tr>
+                    <td>size</td>
+                    <td>
+                        定义渐变的大小，可能值：<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        farthest-corner (默认) : 指定径向渐变的半径长度为从圆心到离圆心最远的角<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        closest-side ：指定径向渐变的半径长度为从圆心到离圆心最近的边<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        closest-corner ： 指定径向渐变的半径长度为从圆心到离圆心最近的角<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        farthest-side ：指定径向渐变的半径长度为从圆心到离圆心最远的边
+                    </td>
+                </tr>
+                <tr>
+                    <td>position</td>
+                    <td>
+                        定义渐变的位置。可能值：<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        center（默认）：设置中间为径向渐变圆心的纵坐标值。<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        top：设置顶部为径向渐变圆心的纵坐标值。<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        bottom：设置底部为径向渐变圆心的纵坐标值。
+                    </td>
+                </tr>
+                <tr>
+                    <td>start-color, ..., last-color </td>
+                    <td>用于指定渐变的起止颜色。</td>
+                </tr>
+            </table>
+        </div>
+
+    </body>
+
+</html>

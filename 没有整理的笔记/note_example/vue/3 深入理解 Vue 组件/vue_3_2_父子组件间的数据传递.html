@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件间的数据传递</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+
+        <!-- 不加:为字符串，加了:是数字（加了:为js表达式） -->
+        <counter :count="0" @inc="handleIncrease"></counter>
+        <counter :count="0" @inc="handleIncrease"></counter>
+        <div>{{total}}</div>
+    </div>
+
+    <!-- 
+        父组件如何向子组件传递数据
+            说明：
+                1. 父组件通过属性形式向子组件传递数据
+                2. 父组件可以通过属性形式向子组件传递参数，父组件可以修改传递过的参数，子组件不能修改父组件传过来的参数（只能用）
+                => 单向数据流（当数据为对象或其他时，改变父组件传过来的参数会影响其他使用该参数的子组件）
+
+        子组件向父组件传递数据
+            说明
+                1. 通过事件形式进行传值
+
+        this.$emit('change', 1);
+            说明
+                1. 触发事件，可以携带多个参数
+                2. 第一个参数为事件名，第二个参数起是要带的参数
+                3. 事件名可以随便定义
+     -->
+
+    <script>
+        
+        var counter = {
+            // 接收父组件传递过来的数据
+            props: ['count'],
+            template: '<div @click="handleClick">{{number}}</div>',
+            data: function(){
+                // count
+                return {
+                    // 克隆父组件传过来的数据，修改该数据
+                    number: this.count
+                }
+            },
+            methods: {
+                handleClick: function(){
+                    // this.count+1; 错误，不能直接修改父组件传递过来的数据
+                    this.number++;
+                    this.$emit('inc', 1);
+                }
+            }
+        }
+        
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                total: 0
+            },
+            components: {
+                counter: counter
+            },
+            methods: {
+                handleIncrease: function(num){
+                        this.total += num;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

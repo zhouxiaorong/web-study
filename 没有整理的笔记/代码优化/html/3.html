@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" value="效率低" onclick="func1()" />   
+  <input type="button" value="效率高" onclick="func2()" /> 
+  <div class="one" id="one"></div>   
+  <script>
+    //效率低的   
+    function func1(){   
+      var start1 = new Date().getTime();   
+      var arr1 = [];
+      for(var i = 0; i < 100000000; i++){
+        arr1[i] = i;
+      }
+      // console.log(arr1.join(','));
+      var end1 = new Date().getTime();   
+      console.log("array_add 1 用时:" + (end1 - start1) + "毫秒");   
+    }   
+    //效率高的   
+    function func2(){   
+      var start2 = new Date().getTime(); 
+      var arr2 = [];
+      for(var i = 0; i < 100000000; i++){
+        arr2.push(i)
+      }
+      // console.log(arr2.join(','));
+      var end2 = new Date().getTime();   
+      console.log("array_add 2 用时:" + (end2 - start2) + "毫秒");
+    }   
+  </script>
+</body>
+</html>

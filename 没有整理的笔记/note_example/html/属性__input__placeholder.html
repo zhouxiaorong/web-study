@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>input-placeholder</title> 
+<style>
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #909;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #909;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #909;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #909;
+}
+</style>
+</head>
+<body>
+
+<form action="demo-form.php">
+  <input type="text" name="fname" placeholder="First name"><br>
+  <input type="text" name="lname" placeholder="Last name"><br>
+  <input type="submit" value="提交">
+</form>
+
+<p><strong>注意：</strong></p>
+<p>placeholder 属性是 HTML5 中的新属性。</p>
+<p>该提示会在用户输入值之前显示在输入字段中。</p>
+<p>Internet Explorer 9及更早 IE 版本不支持 input 标签的 placeholder 属性。</p>
+<p>placeholder 属性适用于下面的 input 类型：text、search、url、tel、email 和 password。</p>
+
+</body>
+</html>

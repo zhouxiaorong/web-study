@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model、v-on、v-for</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 双向绑定 inputValue 数据（一个变化另一个也会变化） -->
+        <input type="text" v-model="inputValue">
+        <!-- 绑定 click 事件 -->
+        <button v-on:click="handleBtnClick">提交</button>
+        <ul>
+            <!-- 循环 list 数据显示， item:循环过程中每一项的内容 -->
+            <li v-for="item in list">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+        var app = new Vue({
+            // 定义标签（要接管的 dom），实例属性
+            el: '#app',
+            // 数据，实例属性
+            data: {
+                list: [],
+                inputValue: ''
+            },
+            // 自定义方法，实例方法
+            methods: {
+                handleBtnClick: function(){
+                    this.list.push(this.inputValue);
+                    this.inputValue = '';
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

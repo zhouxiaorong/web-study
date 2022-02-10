@@ -1,0 +1,37 @@
+
+
+babel {
+    .babelrc文件{
+        {
+            // "presets" : ["es2015"]
+            "presets" : ["es2015"],
+            "plugins" : ["transform-object-rest-spread"]
+        }
+    }
+    安装 {
+        在项目目录中，安装 Babel
+            npm install --save-dev @babel/core
+        安装 babel-preset-es2015
+            cnpm install --save-dev babel-preset-es2015
+        安装 transform-object-rest-spread
+            cnpm install --save-dev babel-plugin-transform-object-rest-spread
+        翻译 js 文件
+            babel 需转换文件(pre.js) -o 转换后文件（next.js）
+        使用 register 加载
+            npm install --save-dev @babel/register
+
+        # 最新转码规则
+            npm install --save-dev @babel/preset-env
+        # react 转码规则
+            npm install --save-dev @babel/preset-react
+            
+    npm install --save-dev @babel/cli
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2"
+    "babel-preset-mobx": "^2.0.0",
+    }
+}

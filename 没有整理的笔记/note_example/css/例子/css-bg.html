@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>纯CSS背景（IE10+）</title>
+    <!-- <link rel="stylesheet" href="/base/css/base-icon.css"> -->
+    <!-- <link rel="stylesheet" href="../css/css-icon.css"> -->
+    <!-- <link rel="stylesheet" href="./a_css/base-icon.css"> -->
+    <script src="../../base/js/jquery-1.8.0.min.js"></script>
+    <style>
+        * {padding: 0px;margin: 0px;}
+        .container {font-size: 0;}
+        .bg {width: 100px;height: 100px;position: relative;margin: 20px;display:inline-block;list-style: none;box-shadow: 0 0 5px 1px #777;}
+
+        .bg_1 {
+            background: linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 0),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 0), #306aad;
+            background-size: 20px 20px;
+        }
+
+        .bg_2 {
+            background: linear-gradient(rgba(255, 255, 255, 0.3) 50%, transparent 0),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.3) 50%, transparent 0), #a3554f;
+            background-size: 33px 33px;
+        }
+
+        .bg_3 {
+            background: linear-gradient(45deg, #999 25%, transparent 0),
+                linear-gradient(45deg, transparent 75%, #999 0),
+                linear-gradient(45deg, #999 25%, transparent 0),
+                linear-gradient(45deg, transparent 75%, #999 0),#eee;
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px, 25px 25px, 50px 50px;
+        }
+
+        .bg_4 {
+            background: radial-gradient(#BF3030 30%, transparent 0),radial-gradient(#BF3030 30%, transparent 0);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+        }
+
+        .bg_5 {
+            background: radial-gradient(black 3px, transparent 0),
+                        radial-gradient(black 3px, transparent 0),
+                        linear-gradient(#fff 4px, transparent 0),
+                        repeating-linear-gradient(45deg, #a4a4a4 0, #a4a4a4 1px, transparent 0 , transparent 35px),
+                        repeating-linear-gradient(-45deg, #a4a4a4 0, #a4a4a4 1px, transparent 0 , transparent 35px);
+            background-size: 50px 50px, 50px 50px, 100% 6px, 100% 100%, 100% 100%;
+            background-position:  0 0, 25px 25px, 0px 0px, 0 0, 0 0;
+        }
+
+        .bg_6 {
+            background:
+            radial-gradient(circle at 0% 50%, transparent 12px, #613 13px, transparent 14px),
+            radial-gradient(circle at 100% 100%, transparent 12px, #613 13px, transparent 14px),
+            #8a3;
+            background-size: 26px 26px;
+            background-position: 0 0, 0 13px;
+        }
+
+        .bg_7 {
+            background: 
+                radial-gradient(circle closest-side at 60% 43%, #b03 26%, transparent 27%), 
+                radial-gradient(circle closest-side at 40% 43%, #b03 26%, transparent 27%), 
+                radial-gradient(circle closest-side at 40% 22%, #d35 45%, transparent 46%), 
+                radial-gradient(circle closest-side at 60% 22%, #d35 45%, transparent 46%), 
+                radial-gradient(circle closest-side at 50% 35%, #d35 30%, transparent 31%),
+                radial-gradient(circle closest-side at 60% 43%, #b03 26%, transparent 27%) 25px 25px, 
+                radial-gradient(circle closest-side at 40% 43%, #b03 26%, transparent 27%) 25px 25px, 
+                radial-gradient(circle closest-side at 40% 22%, #d35 45%, transparent 46%) 25px 25px,
+                radial-gradient(circle closest-side at 60% 22%, #d35 45%, transparent 46%) 25px 25px,  
+                radial-gradient(circle closest-side at 50% 35%, #d35 30%, transparent 31%) 25px 25px, 
+               #b03;
+            background-size: 50px 50px;
+        }
+
+        .bg_8 {
+            background:
+                linear-gradient(to right, transparent 10px, slategray 0, slategray 25px, transparent 0),
+                linear-gradient(to bottom, transparent 10px, slategray 0, slategray 25px, transparent 0),
+                linear-gradient(to right, #A8B1BB 5px, transparent 0),
+                linear-gradient(to bottom, #A8B1BB 5px, transparent 0),
+                slategray;
+            background-size: 30px 30px;
+        }
+        /*  #A8B1BB */
+        
+    </style>
+
+    <script>
+    $(function(){
+        
+        //var backUrl = location.href.getValue('backUrl');
+        var backUrl = location.href.split('backUrl=')[1];
+        console.log('backurl:'+backurl);
+    })
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="bg bg_1"></div>
+        <div class="bg bg_2"></div>
+        <div class="bg bg_3"></div>
+        <div class="bg bg_4"></div>
+        <div class="bg bg_5"></div>
+        <div class="bg bg_6"></div>
+        <div class="bg bg_7"></div>
+        <div class="bg bg_8"></div>
+    </div>
+
+</body>
+
+</html>

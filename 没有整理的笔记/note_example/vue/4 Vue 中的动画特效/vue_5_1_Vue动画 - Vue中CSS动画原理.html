@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中CSS动画原理</title>
+    <script src="/common/js/vue.js"></script>
+    <style>
+        .fade-enter, .fade-leave-to {opacity: 0}
+        .fade-enter-active, .fade-leave-active {transition: opacity 3s;}
+    </style>
+</head>
+<body>
+    <div id="root">
+        <button @click="handleBtnClick">切换</button>
+        <button @click="handleBtnClick2">change</button>
+
+        <transition name="fade">
+            <!-- v-if -->
+            <div v-if="show">if hello world</div>
+        </transition>
+        <transition name="fade">
+            <!-- v-show -->
+            <div v-show="show">show hello world</div>
+        </transition>
+        <transition name="fade">
+            <!-- 动态组件 -->
+            <child-one v-if="type === 'child-one'"></child-one>
+            <child-two v-if="type === 'child-two'"></child-two>
+        </transition>
+    </div>
+
+    <!-- 
+        transition
+            说明：
+                1. 当一个元素被 transition 包裹住后，vue 会自动分析元素 css 样式，构建动画流程
+                2. 未设置 name 时，默认为 v ,v-enter, v-enter-active, v-enter-to
+            从隐藏到显示
+                第一帧：添加 name-enter, name-enter-active
+                第二帧：移除 name-enter, 添加 name-enter-to
+                最后一帧：移除 name-enter-active, name-enter-to
+            从显示到隐藏
+                第一帧：name-leave, name-leave-active
+                第二帧：移除 name-leave, 添加 name-leave-to
+                第三帧：移除 name-leave-active, name-leave-to
+            
+            name-enter, name-leave:
+                在第一帧时添加fade-enter，当动画运行到第二帧时，vue 自动把 fade-enter 移除
+            name-enter-active, name-leave-active: 
+                从动画的开始到结束一直存在，在第一帧时添加，最后一帧移除
+            name-enter-to, name-leave-to:
+                在第二帧时添加，最后一帧移除
+
+        CSS 动画效果,CSS 过渡动画效果，应用于 v-if, v-show, 动态组件 
+     -->
+
+    <script>
+        Vue.component('child-one', {
+            template:  `<div>child-one</div>`,
+        })
+        Vue.component('child-two', {
+            template:  `<div>child-two</div>`,
+        })
+
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                show: true,
+                type: 'child-one'
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.show = !this.show;
+                },
+                handleBtnClick2: function(){
+                    this.type = this.type === 'child-one' ? 'child-two' : 'child-one';
+                },
+            }
+        })
+    </script>
+</body>
+</html>

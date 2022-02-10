@@ -1,0 +1,30 @@
+// @import 'index';
+
+// body {
+//   background-color: $bg-color;
+//   color: $color;
+//   font-size: $fsize;
+
+//   .con {
+//     @import "base";
+//     color: $color;
+//   }
+//   .footer {
+//     color: $color;
+//   }
+// }
+
+$text-color: blue;
+    $text-color: red;
+    $link-color: blue;
+    $link-color: red !default;
+    $con-color: red !default;
+    p {
+      color: $text-color;
+    }
+    a {
+      color: $link-color;
+    }
+    .con {
+      color: $con-color;
+    }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非父子组件间的传值</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        
+        <div>
+            <child content="Dell"></child>
+            <child content="Lee"></child>
+        </div>
+        <div>
+            <child2 content="Mia"></child2>
+        </div>
+
+
+    </div>
+
+    <!-- 
+        非父子组件间的传值
+            1. Vuex
+            2. 使用发布订阅模式解决（Bus/总线/发布订阅模式/观察者模式）
+           
+     -->
+
+    <script>
+        // 在 Vue 类上挂了一个 bus 属性，每一个 Vue 的实例上都会有  bus 属性
+        Vue.prototype.bus = new Vue();
+
+        Vue.component('child', {
+            data: function(){
+                return {
+                    selfContent: this.content,
+                }
+            },
+            props: {
+                content: String,
+            },
+            template: '<div @click="handleClick">{{selfContent}}</div>',
+            methods: {
+                handleClick: function(){
+                    console.log('handleClick')
+                    this.bus.$emit('change', this.selfContent);
+                }
+            }
+        })
+
+        Vue.component('child2', {
+            data: function(){
+                return {
+                    selfContent: this.content,
+                }
+            },
+            props: {
+                content: String,
+            },
+            template: '<div>{{selfContent}}</div>',
+            // 组件被挂载时会执行的函数
+            mounted: function(){
+                var _this = this;
+                this.bus.$on('change', function(con){
+                    console.log('change:'+con)
+                    _this.selfContent = con;
+                })
+            }
+
+        })
+        var vm = new Vue({
+            el: '#root',
+            methods: {
+                handleClick: function(){
+                    console.log('handleClick');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

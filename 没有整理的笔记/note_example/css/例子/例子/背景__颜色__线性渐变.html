@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>背景-线性渐变</title>
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+
+			body {
+				padding: 10px;
+			}
+
+			.info p strong {
+				width: 100px;
+				text-align: right;
+				display: inline-block;
+				margin-right: 10px;
+			}
+
+			table tr th {
+				text-align: center;
+			}
+
+			table tr td {
+				text-align: left;
+				padding-right: 50px;
+			}
+
+			.grad {
+				display: inline-block;
+				margin: 5px;
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				/* 浏览器不支持的时候显示 */
+				vertical-align: top;
+				text-align: center;
+				color: #888888;
+				font-size: 20px;
+				font-weight: bold;
+				line-height: 100px;
+			}
+
+			#grad1 {
+				background-image: linear-gradient(red, yellow, green);
+			}
+
+			#grad2 {
+				background-image: linear-gradient(to right, red, yellow);
+			}
+
+			#grad3 {
+				background-image: linear-gradient(to bottom right, red, yellow);
+			}
+
+			#grad8 {
+				width: 215px;
+				background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+				/* 标准的语法（必须放在最后） */
+			}
+
+			#grad9 {
+				background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 1));
+				background-color: transparent;
+			}
+
+			#grad4 {
+				background-image: linear-gradient(0deg, red, yellow);
+			}
+
+			#grad5 {
+				background-image: linear-gradient(90deg, red, yellow);
+			}
+
+			#grad6 {
+				background-image: linear-gradient(180deg, red, yellow);
+			}
+
+			#grad7 {
+				background-image: linear-gradient(-90deg, red, yellow);
+			}
+			#grad10 {
+				background-image: linear-gradient(to right,red 0%,red 50%,yellow 50%,yellow 100%);
+			}
+			#grad11 {
+                background-image: linear-gradient(-45deg, red 0%, red 50%, yellow 50%, yellow 100%);
+			}
+			#grad12 {
+                background-image: linear-gradient(-45deg, transparent 49%, red 49%, red 51%, transparent 51%), 
+                          linear-gradient(45deg, transparent 49%, red 49%, red 51%, transparent 51%);
+                background-color:transparent;
+			}
+            #grad13 {
+                background-image: repeating-linear-gradient(#cf6666,#cf6666 5%,#ebeb41 5%,#ebeb41 10%)
+			}
+            #grad14 {
+                background-image: repeating-linear-gradient(-45deg,#cf6666,#cf6666 3%,#ebeb41 3%,#ebeb41 6%),
+                                  repeating-linear-gradient(45deg,#cf6666,#cf6666 3%,#ebeb41 3%,#ebeb41 6%)
+			}
+		</style>
+	</head>
+
+	<body>
+		<h3>背景颜色-线性渐变 :  向下/向上/向左/向右/对角方向</h3>
+		<div class="grad" id="grad1"></div>
+		<div class="grad" id="grad2"></div>
+		<div class="grad" id="grad3"></div>
+		<div class="grad" id="grad4"></div>
+		<div class="grad" id="grad5"></div>
+		<div class="grad" id="grad6"></div>
+		<div class="grad" id="grad7"></div>
+
+		<div class="grad" id="grad8">渐变背景</div>
+		<div class="grad" id="grad9"></div>
+		<div class="grad" id="grad10"></div>
+		<div class="grad" id="grad11"></div>
+		<div class="grad" id="grad12"></div>
+		<div class="grad" id="grad13"></div>
+		<div class="grad" id="grad14"></div>
+
+		<div class="info">
+			<p><strong>CSS 语法 </strong>background-image: linear-gradient(direction, color-stop1, color-stop2, ...);</p>
+			<p><strong>定义与用法</strong>linear-gradient() 函数用于创建一个线性渐变的 "图像"。</p>
+			<p><strong></strong>为了创建一个线性渐变，你需要设置一个起始点和一个方向（指定为一个角度）的渐变效果。</p>
+			<p><strong></strong>你还要定义终止色。终止色就是你想让Gecko去平滑的过渡，并且你必须指定至少两种，当然也会可以指定更多的颜色去创建更复杂的渐变效果。</p>
+			<p><strong></strong></p>
+
+			<table>
+				<tr>
+					<th>值</th>
+					<th>实例</th>
+					<th>描述</th>
+				</tr>
+				<tr>
+					<td>direction</td>
+					<td>to top, to right, to bottom, to left, to top left, to bottom right</td>
+					<td>用角度值指定渐变的方向（或角度）。</td>
+				</tr>
+				<tr>
+					<td>color-stop1, color-stop2,...</td>
+					<td>red, green, yellow, rgba(255,0,0,.3)</td>
+					<td>用于指定渐变的起止颜色。</td>
+				</tr>
+			</table>
+
+		</div>
+
+	</body>
+
+</html>

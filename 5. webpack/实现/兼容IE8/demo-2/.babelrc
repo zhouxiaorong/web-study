@@ -1,0 +1,41 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage"
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime", 
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-transform-object-assign"
+  ]
+ }
+
+ 
+
+//  {
+//   "presets": [
+//     [
+//       "@babel/preset-env",
+//       {
+//         "targets": {
+//           "ie": "8"
+//         },
+//         "useBuiltIns": "usage",
+//         "corejs": 3
+//       }
+//     ]
+//   ],
+//   "plugins": [
+//     [
+//       "@babel/plugin-transform-modules-commonjs",
+//       {
+//         "loose": true
+//       }
+//     ]
+//   ],
+//   "minified": true
+// }

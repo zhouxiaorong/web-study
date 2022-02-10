@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用组件的细节点</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+
+        <!-- 使用 is 解决 html5 的一些小 bug：　子组件 is -->
+        <table>
+            <tbody>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+
+        <!--  ref 的使用：在普通的 DOM 元素上使用 -->
+        <div ref="hello" @click="handleClick">{{message}}</div>
+
+        <!-- ref 的使用：在子组件上使用  -->
+        <counter ref="cone" @change="handleChange"></counter>
+        <counter ref="ctwo" @change="handleChange"></counter>
+        <div>total: {{total}}</div>
+    </div>
+
+    <!-- 
+
+        is="组件名"
+            解决 html5 中 某些节点下只能为固定节点，不然会报错的问题
+            例： <li is="row"></li>
+
+        子组件中的data
+            说明
+                1. 子组件中，data只能定义成函数，返回一个对象，里面包含对应的数据
+                   => 让每一个子组件都拥有一个独立的数据存储，防止出现多个子组件间互相影响的情况（一个子组件会被调用多次，每一个子组件都应该有自己的数据，不应该共享一个数据）
+                   
+        ref
+            引用，获取 dom 节点
+            说明：
+                1. 如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素
+                2. 如果用在子组件上，引用就指向组件实例
+                3. 当 v-for 用于元素或组件的时候，引用信息将是包含 DOM 节点或组件实例的数组。
+            注意点：
+                关于 ref 注册时间：
+                    1. ref 本身是作为渲染结果被创建的，在初始渲染的时候你不能访问它们（它们还不存在！）
+                    2. $refs 也不是响应式的，因此不应该试图用它在模板中做数据绑定。
+
+
+        this.$refs.name
+            this.$refs 指 Vue 里所有的引用，name 为引用名
+     -->
+
+    <script>
+        Vue.component('row', {
+            // 子组件中的 data 必须是一个函数
+            data: function(){
+                return {
+                    msg: 'This is row'
+                }
+            },
+            template: '<tr><td>{{msg}}</td></tr>'
+        })
+        Vue.component('counter', {
+            template: '<div @click="handleClick">{{number}}</div>',
+            data: function(){
+                return {
+                    number: 0
+                }
+            },
+            methods: {
+                handleClick: function(){
+                    this.number++;
+                    // 触发事件
+                    this.$emit('change', 1);
+                }
+            }
+        })
+        var vm = new Vue({
+            // 负责定义这个 Vue 实例接管的 dom 的最外层的标签
+            el: '#root',
+            // 存放数据
+            data: {
+                message: 'hello world',
+                total: 0
+            },
+            // 自定义方法
+            methods: {
+                handleClick: function(){
+                    // 获取 dom 节点中的内容
+                    console.log(this.$refs.hello.innerHTML)
+                },
+                handleChange: function(num){
+                    this.total = this.$refs.cone.number + this.$refs.ctwo.number;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

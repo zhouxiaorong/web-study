@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在Vue中同时使用过渡和动画</title>
+    <script src="/common/js/vue.js"></script>
+    <link rel="stylesheet" href="/common/js/animate.min.css">
+    <style>
+        .fade-enter, .fade-leave-to {opacity: 0}
+        .fade-enter-active, .fade-leave-active {transition: opacity 3s;}
+    </style>
+</head>
+<body>
+    <div id="root">
+        <button @click="handleBtnClick">切换</button>
+
+        <!-- 
+         -->
+        <transition 
+                    name="fade" type="transition"
+                    appear
+                    enter-active-class="animate__animated animate__swing fade-enter-active"
+                    leave-active-class="animate__animated animate__shakeX fade-leave-active"
+                    appear-active-class="animate__animated animate__swing"
+        >
+            <!-- v-if -->
+            <div v-show="show">if hello world</div>
+        </transition>
+        <transition 
+                    :duration="{enter: 5000, leave: 10000}"
+                    name="fade" 
+                    appear
+                    enter-active-class="animate__animated animate__swing fade-enter-active"
+                    leave-active-class="animate__animated animate__shakeX fade-leave-active"
+                    appear-active-class="animate__animated animate__swing"
+        >
+            <!-- v-if -->
+            <div v-show="show">if hello world</div>
+        </transition>
+    </div>
+
+    <!-- 
+        一、第一次内容显示时使用动画
+            1. 添加 appear 属性
+            2. 添加 appear-active-class 属性,值为 animate 动画名，
+            3. 例：
+                <transition appear appear-active-class="animate__animated animate__swing">要动画的内容</transition>
+        
+
+        二、同时使用过渡和动画
+            1. 在 enter-active-class 属性中添加值： fade-enter-active 
+            2. 在 leave-active-class 属性中添加值： fade-leave-active 
+
+
+        三、type="transition"
+            确定以哪个动画时长为准，例为以 transition 动画时间为准
+
+        自定义动画播放时长
+            说明
+                单位为毫秒
+            同时设置 显示、隐藏 时长
+                :duration="10000"
+            分开设置  显示、隐藏 时长
+                :duration="{enter: 5000, leave: 10000}"
+                => 各自分开自定义显示/隐藏时长，enter:显示的时长，leave:隐藏的时长
+     -->
+
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                show: true,
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.show = !this.show;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件参数校验与非 props 特性</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+
+        <!-- 组件参数校验 start  -->
+        <child content="hello world"></child>
+        <!-- 报错（必须得是数字类型）： <child number="1"></child> -->
+        <child :number="1"></child>
+        <!-- 报错（必须得是数字或字符串类型）： <child :num="{}"></child> -->
+        <name></name>
+        <name name="zhouxiaorong"></name>
+        <!-- 组件参数校验 end  -->
+
+        <!-- 非 props 特性 start -->
+
+        <!-- 非 props 特性 end -->
+    </div>
+
+    <!-- 
+        组件参数校验
+            说明：
+                1. 子组件有权利对这些参数作一些约束
+
+
+        props 特性
+            说明：
+                当父组件使用子组件时，通过属性向子组件传值时，恰好子组件在props里声明了该属性（父子组件有对应关系）
+            特点：
+                1. 传递的参数不会在 dom 标签上显示
+                2. 当父组件传递了参数，子组件接收了参数之后，子组件就能通过 {{参数名}} 或 this.参数名 去取得参数内容
+        
+        非 props 特性
+            说明：  
+                1. 父组件向子组件传递了一个参数，但是子组件并没有接收该参数内容（并没有在 props 中声明该参数）
+                   => 子组件里没办法使用该参数，一旦使用该参数就报错了
+                2. 属性会展示在子组件最外层的 dom 标签的 html 属性里
+     -->
+
+    <script>
+        Vue.component('child', {
+            props: {
+                // 子组件接收到的 content 参数必须得是 String 类型
+                content: String, 
+                // 子组件接收到的 number 参数必须得是 Number 类型
+                number: Number,
+                // 子组件接收到的 num 参数必须得是 Number 或 Strign 类型
+                num: [Number, String],
+            },
+            template: '<div>{{content}}</div>',
+        })
+        Vue.component('name', {
+            props: {
+                // 子组件接收到的 name 参数必须得是 String 类型
+                name: {
+                    type: String,
+                    // 设置这个参数是不是必传的，true:必传 false:非必传
+                    // required: true,
+                    default: 'default value',
+                    // 自定义校验器
+                    validator: function(value){
+                        // 参数值长度必须大于 5
+                        return value.length > 0
+                    }
+                }
+            },
+            template: '<div>{{name}}</div>',
+        })
+        
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                total: 0
+            }
+        });
+    </script>
+</body>
+</html>

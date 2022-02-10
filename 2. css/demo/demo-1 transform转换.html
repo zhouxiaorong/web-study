@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>transform转换</title>
+  <style>
+    body, div, span, p, ul, li {padding: 0px;margin: 0px;font-size: 16px;list-style: none;}
+    
+    .box div {
+      width:100px;
+      height:100px;
+      margin: 20px;
+      vertical-align: top;
+      border: 1px solid black;
+      display: inline-block;
+      perspective:100px;
+      -webkit-perspective:100px; /* Safari and Chrome */
+    }
+    .box div p {
+      width:100px;
+      height:100px;
+      text-align: center;
+      overflow: hidden;
+      background: pink;
+      padding: 8px;
+      box-sizing: border-box;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-box-orient: horizontal;
+      -webkit-box-pack: center;
+      -webkit-box-align: center;
+    }
+    /* 
+      none	定义不进行转换。
+
+      matrix(n,n,n,n,n,n)	定义 2D 转换，使用六个值的矩阵。
+      matrix3d(n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n)	定义 3D 转换，使用 16 个值的 4x4 矩阵。
+      
+      perspective(n)	为 3D 转换元素定义透视视图。
+    */
+    
+  </style>
+</head>
+<body>
+  <div class="box">
+    <!-- translate(x,y)	定义 2D 转换。 -->
+    <div><p style="transform: translate(10px, 10px);">translate(10px,10px)</p></div>
+    <!-- translateX(x)	定义转换，只是用 X 轴的值。 -->
+    <div><p style="transform: translateX(10px);">translateX(10px)</p></div>
+    <!-- translateY(y)	定义转换，只是用 Y 轴的值。 -->
+    <div><p style="transform: translateY(10px);">translateY(10px)</p></div>
+    <!-- translateZ(z)	定义 3D 转换，只是用 Z 轴的值。 -->
+    <!-- translate3d(x,y,z)	定义 3D 转换。 -->
+    <div><p style="transform: translate3d(10px, 10px, 10px);">translate3d(10px,10px,10px)</p></div>
+  </div>
+
+  <div class="box">
+    <!-- scale(x[,y]?)	定义 2D 缩放转换。 -->
+    <div><p style="transform: scale(0.8);">scale(0.8)</p></div>
+    <!-- scale(x[,y]?)	定义 2D 缩放转换。 -->
+    <div><p style="transform: scale(0.8, 1);">scale(0.8, 1)</p></div>
+    <!-- scaleX(x)	通过设置 X 轴的值来定义缩放转换。 -->
+    <div><p style="transform: scaleX(0.8);">scaleX(0.8)</p></div>
+    <!-- scaleY(y)	通过设置 Y 轴的值来定义缩放转换。 -->
+    <div><p style="transform: scaleY(0.8);">scaleY(0.8)</p></div>
+    <!-- scaleZ(z)	通过设置 Z 轴的值来定义 3D 缩放转换。 -->
+    <!-- scale3d(x,y,z)	定义 3D 缩放转换。 -->
+  </div>
+
+  <div class="box">
+    <!-- rotate(angle)	定义 2D 旋转，在参数中规定角度。 -->
+    <div><p style="transform: rotate(45deg);">rotate(45deg)</p></div>
+    <div><p style="transform: rotate(-45deg);">rotate(-45deg)</p></div>
+    <!-- rotateX(angle)	定义沿着 X 轴的 3D 旋转。 -->
+    <div><p style="transform: rotateX(45deg);">rotateX(45deg)</p></div>
+    <!-- rotateY(angle)	定义沿着 Y 轴的 3D 旋转。 -->
+    <div><p style="transform: rotateY(45deg);">rotateY(45deg)</p></div>
+    <!-- rotateZ(angle)	定义沿着 Z 轴的 3D 旋转。 -->
+    <!-- rotate3d(x,y,z,angle)	定义 3D 旋转。 -->
+  </div>
+
+  <div class="box">
+    <!-- skew(x-angle,y-angle)	定义沿着 X 和 Y 轴的 2D 倾斜转换。 -->
+    <div><p style="transform: skew(20deg, 0deg);">skew(20deg, 0deg)</p></div>
+    <div><p style="transform: skew(-20deg, 0deg);">skew(20deg, 0deg)</p></div>
+    <div><p style="transform: skew(0deg, 20deg);">skew(0deg, 20deg)</p></div>
+    <div><p style="transform: skew(0deg, -20deg);">skew(0deg, 20deg)</p></div>
+    <div><p style="transform: skew(20deg, 20deg);">skew(20deg, 20deg)</p></div>
+    <div><p style="transform: skew(-20deg, -20deg);">skew(-20deg, -20deg)</p></div>
+    <!-- skewX(angle)	定义沿着 X 轴的 2D 倾斜转换。 -->
+    <div><p style="transform: skewX(20deg);">skewX(20deg)</p></div>
+    <!-- skewY(angle)	定义沿着 Y 轴的 2D 倾斜转换。 -->
+    <div><p style="transform: skewY(20deg);">skewY(20deg)</p></div>
+  </div>
+
+  <div class="demo-1">
+    <ul>
+      <li><p>1</p></li>
+      <li><p>2</p></li>
+      <li><p>3</p></li>
+      <li><p>4</p></li>
+      <li><p>5</p></li>
+    </ul>
+  </div>
+  <style>
+    .demo-1 li {
+      display: inline-block;
+      margin:20px;
+      width:100px;
+      height:100px;;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 100px;
+      background-color: pink;
+      cursor: pointer;
+      position: relative;
+    }
+    .demo-1 li p {
+      color:white;
+      font-size: 50px;
+      transition: all 1s;
+    }
+    .demo-1 li::before {
+      content: "";
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      position: absolute;
+      left:-10px;
+      border: 5px solid transparent;
+      top:-10px;
+      box-sizing: border-box;
+      border-top-color: pink;
+      transform: rotate(-45deg);
+      transition: all 1s;
+    }
+    .demo-1 li:hover p {
+      transform: scale(1.2);
+    }
+    .demo-1 li:hover::before {
+      transform: rotate(315deg);
+    }
+  </style>
+
+  <div class="demo-2">
+    <ul>
+      <li><p>abcdefg</p></li>
+    </ul>
+  </div>
+  <style>
+    .demo-2 ul li {width:200px;height:100px;border:1px solid black;position: relative;}
+    .demo-2 ul li p {opacity: 0;width:100%;height:35px;line-height: 35px;text-indent: 10px;position: absolute;left:0px;bottom:0px;
+      color:white;background: rgba(0, 0, 0, 0.5);}
+    .demo-2 ul li,
+    .demo-2 ul li p {transition: all 2s ease 0s;}
+    .demo-2 ul li:hover p {opacity: 1;}
+  </style>
+
+  <div class="demo-3">
+    <ul>
+      <li><p>aaa</p><p>aaa</p></li>
+      <li><p>aaa</p><p>aaa</p></li>
+      <li><p>aaa</p><p>aaa</p></li>
+      <li><p>aaa</p><p>aaa</p></li>
+    </ul>
+  </div>
+  <style>
+    .demo-3 {padding: 100px;}
+    .demo-3 li {width:100px;height: 100px;position: relative;display: inline-block;perspective: 500px;}
+    .demo-3 li p {width:100%;height: 100%;border-radius: 50%;position: absolute;left:0px;top:0px;font-size: 30px;text-align: center;line-height: 100px;
+      background-color: pink;color:#fff;z-index: 999;transition: all 1s;}
+    .demo-3 li p:nth-child(2) {background-color: pink;} 
+    .demo-3 li:nth-child(1) p:nth-child(2) {transform-origin:0 0} 
+    .demo-3 li:nth-child(2) p:nth-child(2) {transform-origin:0 0} 
+    .demo-3 li:nth-child(3) p:nth-child(2) {transform-origin:100% 100%} 
+    .demo-3 li:nth-child(4) p:nth-child(2) {transform-origin:100% 100%} 
+    .demo-3 li:nth-child(1):hover p:nth-child(2) {transform: rotateY(-180deg);}
+    .demo-3 li:nth-child(2):hover p:nth-child(2) {transform: rotateX(-180deg);}
+    .demo-3 li:nth-child(3):hover p:nth-child(2) {transform: rotateX(180deg);}
+    .demo-3 li:nth-child(4):hover p:nth-child(2) {transform: rotateY(180deg);}
+  </style>
+
+  <div class="demo-4">
+    <ul><li>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+    </li></ul>
+  </div>
+  <style>
+    .demo-4 {margin:0px 200px 200px 200px;}
+    .demo-4 ul li {width:100px;height: 100px;perspective:10000px;transform-style: preserve-3d;transition: all 10s;transform: rotateX(45deg) rotateY(45deg);}
+    .demo-4 ul li p {width:100px;height: 100px;position: absolute;top:0px;left:0px;}
+    .demo-4 ul li p:nth-child(1) {background-color: rgba(255, 0, 0, 0.5);transform: translateZ(50px);}
+    .demo-4 ul li p:nth-child(2) {background-color: rgba(0, 255, 0, 0.5);transform: rotateX(90deg) translateZ(50px);}
+    .demo-4 ul li p:nth-child(3) {background-color: rgba(19, 19, 65, 0.5);transform: rotateX(180deg) translateZ(50px);}
+    .demo-4 ul li p:nth-child(4) {background-color: rgba(255, 255, 0, 0.5);transform: rotateX(270deg) translateZ(50px);}
+    .demo-4 ul li p:nth-child(5) {background-color: rgba(255, 0, 255, 0.5);transform: rotateY(90deg) translateZ(50px);}
+    .demo-4 ul li p:nth-child(6) {background-color: rgba(0, 255, 255, 0.5);transform: rotateY(-90deg) translateZ(50px);}
+    .demo-4 ul li:hover {transform: rotateX(405deg) rotateY(405deg);}
+  </style>
+</body>
+</html>

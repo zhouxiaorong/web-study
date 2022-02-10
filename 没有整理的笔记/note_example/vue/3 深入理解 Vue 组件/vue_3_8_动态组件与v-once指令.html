@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件与v-once指令</title>
+    <script src="/common/js/vue.js"></script>
+
+    <style>
+        body, div, p {
+            padding:0px;
+            margin:0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        
+        <!-- 方法一 -->
+        <!-- <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-if="type === 'child-two'"></child-two>
+        <button @click="handleBtnClick">change</button> -->
+
+        <!-- 方法二
+            动态组件
+                1. 会根据 :is 里数据的变化自动加载子组件
+                2. 每一次切换时，都需要把一个组件销毁，再创建一个组件
+         -->
+        <component :is="type"></component>
+        <button @click="handleBtnClick">change</button>
+
+        <!-- v-once指令
+            如果每次切换时内容都一样 ，可以使用
+            有 v-once 指 令的子组件，第一次渲染时，直接放到内存里了，再次使用不用重新创建，直接从内存中拿
+         -->
+        <child-three v-if="type2 === 'child-three'"></child-three>
+        <child-four v-if="type2 === 'child-four'"></child-four>
+        <button @click="handleBtnClick2">change</button>
+
+    </div>
+
+    <!-- 
+
+     -->
+
+    <script>
+
+        Vue.component('child-one', {
+            template:  `<div>child-one</div>`,
+        })
+        Vue.component('child-two', {
+            template:  `<div>child-two</div>`,
+        })
+        Vue.component('child-three', {
+            template:  `<div v-once>child-three</div>`,
+        })
+        Vue.component('child-four', {
+            template:  `<div v-once>child-four</div>`,
+        })
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                type: 'child-one',
+                type2: 'child-three'
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.type = this.type === 'child-one' ? 'child-two' : 'child-one';
+                },
+                handleBtnClick2: function(){
+                    this.type2 = this.type2 === 'child-three' ? 'child-four' : 'child-three';
+                },
+            }
+        });
+    </script>
+</body>
+</html>

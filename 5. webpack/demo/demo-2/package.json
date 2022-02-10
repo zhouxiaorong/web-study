@@ -1,0 +1,20 @@
+{
+  "name": "demo-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "default": "webpack",
+    "dev": "webpack --config config/webpack.config.dev.js",
+    "prod": "webpack --config config/webpack.config.prod.js",
+    "start": "webpack-dev-server --config config/webpack.config.server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14"
+  }
+}

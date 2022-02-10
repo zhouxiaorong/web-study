@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><!-- 在IE运行最新的渲染模式 -->
+<title>box-reflect</title>
+
+<style>
+.reflect-1{margin:0 auto;font:bold 20px/1.231 georgia,sans-serif;
+	text-transform:uppercase;/*设置对象中的文本的大小写:全部显示成大写; */
+	/*设置文字倒影：在下面显示一半的半透明黑色倒影*/
+	box-reflect:below;
+	-webkit-box-reflect: below;
+	/*-webkit-box-reflect:below 0 -webkit-linear-gradient(transparent,transparent 30%,rgba(255,255,255,.3));*/
+}
+</style>
+</head>
+<body>
+<div class="reflect-1">文字倒影a</div>
+</body>
+</html>
+			

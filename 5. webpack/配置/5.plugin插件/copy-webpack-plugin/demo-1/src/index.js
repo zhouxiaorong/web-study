@@ -1,0 +1,1 @@
+document.write('copy-webpack-plugin demo-1 index')

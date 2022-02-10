@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>j</title>
+  <style>
+    body, div, p, button, h3 {padding:0px;margin:3px 0px;font-family: 'Courier New', 'Microsoft YaHei';cursor: default;}
+  </style>
+  <script>
+    var params = {
+      num:0
+    }
+  </script>
+</head>
+<body>
+  
+  <!-- 
+    document.getElementById(id): 通过元素 id 来查找元素
+    element.onclick = function(){code}: 向 onclick 事件添加事件处理程序
+   -->
+  <button id="add">add</button>
+  <script>
+    document.getElementById('add').onclick = function(){
+      console.log(this.innerHTML);
+      params.num++
+      addDiv();
+    }
+  </script>
+  
+  <!-- 
+    createElement: 通过指定名称创建一个HTML元素
+    element.setAttribute(attribute, value): 改变 HTML 元素的属性值
+    createTextNode: 创建文本节点
+    appendChild: 向元素添加新的子节点，作为最后一个子节点。
+   -->
+   <script>
+    function addDiv(){
+      var div = document.createElement("div");// 创建一个 div 标题元素节点
+      div.setAttribute('class', 'element');// 设置 class
+      div.setAttribute('num', params.num);
+      var text = document.createTextNode(params.num+"-Hello World");// 创建文本节点
+      div.appendChild(text);// 将文本节点添加到标题节点
+      document.body.appendChild(div);// 在body最后面添加div元素节点
+    }
+  </script>
+  
+  <!-- 
+    document.getElementsByClassName(name): 通过类名来查找元素
+    document.removeChild(node): 从元素中移除子节点。以 Node 对象返回被删除的节点，如果节点不存在则返回 null。
+   -->
+   <button id="del">del</button>
+   <script>
+    document.getElementById('del').onclick = function(){
+      var ele = document.getElementsByClassName('element');
+      if(params.num > 0){
+        params.num--;
+        document.body.removeChild(ele[params.num]);
+      }
+    }
+   </script>
+   
+  <!-- 
+    document.getElementsByTagName(name): 通过标签名来查找元素
+    element.getAttribute(attribute): 获取 HTML 元素的属性值
+    element.innerHTML = value: 改变元素的 inner HTML
+    element.style.property = value: 改变 HTML 元素的样式
+   -->
+  <button id="update">update</button>
+  <script>
+    document.getElementById('update').onclick = function(){
+      var div = document.getElementsByTagName('div');
+      var i , len = div.length;
+      for(i = 0; i < len; i++){
+        var num = div[i].getAttribute('num') || '';
+        div[i].innerHTML = '<p>'+ num +' - p</p>';
+        div[i].style.color = getRandomColor();
+      }
+    }
+  </script>
+   
+  <!-- 
+    element.attribute = value: 改变 HTML 元素的属性值
+    document.replaceChild(newnode,oldnode): 替换元素中的子节点。
+    document.write(text): 写入 HTML 输出流
+   -->
+
+
+   <script>
+    // 生成随机颜色
+    var getRandomColor = function(){
+      return '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).slice(-6);
+    }
+   </script>
+</body>
+</html>

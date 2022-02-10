@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+    <title>CodePen - Staggered LandIn Text</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(rgba(16, 16, 16, 0.8), rgba(16, 16, 16, 0.8)), url(https://i.loli.net/2019/10/18/buDT4YS6zUMfHst.jpg);
+            background-size: cover;
+        }
+
+        p {
+            margin: 0 9em;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        .landIn {
+            display: flex;
+            flex-wrap: wrap;
+            line-height: 1.8;
+            color: white;
+            font-family: Lora, serif;
+            white-space: pre;
+        }
+
+        .landIn span {
+            animation: landIn 0.8s ease-out both;
+        }
+
+        @keyframes landIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script>
+        window.console = window.console || function (t) { };
+    </script>
+    <script>
+        if (document.location.search.match(/type=embed/gi)) {
+            window.parent.postMessage("resize", "*");
+        }
+    </script>
+</head>
+
+<body translate="no">
+    <p class="landIn">Ano hi watashitachi mada shiranai no Fushigi no monogatari desu.</p>
+    <script id="rendered-js">
+        var landInTexts = document.querySelectorAll(".landIn");
+        landInTexts.forEach(function (landInText) {
+            var letters = landInText.textContent.split("");
+            landInText.textContent = "";
+            letters.forEach(function (letter, i) {
+                var span = document.createElement("span");
+                span.textContent = letter;
+                span.style.animationDelay = i * 0.05 + "s";
+                landInText.append(span);
+            });
+        });
+//# sourceURL=pen.js
+    </script>
+</body>
+
+</html>

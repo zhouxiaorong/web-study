@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/common/js/jquery-1.8.0.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" id="input">
+        <button id="btn">提交</button>
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        function Page() {
+        }
+        $.extend(Page.prototype, {
+            init: function () {
+                this.bindEvents()
+            },
+            bindEvents: function () {
+                var btn = $('#btn');
+                btn.on('click', $.proxy(this.handleBtnClick, this))
+            },
+            handleBtnClick: function () {
+                var $input = $(" #input");
+                var $list = $("#list");
+                var inputValue = $input.val();
+                $list.append('<li>' + inputValue + '</li>');
+                $input.val('');
+            }
+        })
+        var page = new Page();
+        page.init();
+
+    </script>
+</body>
+
+</html>

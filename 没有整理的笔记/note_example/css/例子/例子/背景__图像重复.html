@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>背景-图像重复</title>
+        <style>
+            * {
+                margin: 0px;
+                padding: 0px;
+            }
+
+            body {
+                padding: 10px;
+            }
+
+            .info p strong {
+                width: 100px;
+                text-align: right;
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+            table tr th {
+                border: 1px solid #000;
+                text-align: center;
+                padding: 10px;
+            }
+
+            table tr td {
+                padding: 10px;
+                border: 1px solid #000;
+                text-align: left;
+                padding-right: 50px;
+                vertical-align: top;
+            }
+
+            table tr td span {
+                width: 120px;
+                display: inline-block;
+            }
+
+            .grad {
+                display: inline-block;
+                margin: 5px;
+                width: 150px;
+                height: 100px;
+                background-color: red;
+                /* 浏览器不支持的时候显示 */
+                vertical-align: top;
+                text-align: center;
+                color: #888888;
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 100px;
+                background-image: url(../../a_images/img-2.png);
+                background-size: 80px 45px;
+            }
+
+            #grad1 {
+                background-image: radial-gradient(red, yellow, slateblue);
+            }
+            #grad2 {
+                background-repeat: repeat;
+            }
+            #grad3 {
+                background-repeat: repeat-x;
+            }
+            #grad4 {
+                background-repeat: repeat-y;
+            }
+            #grad5 {
+                background-repeat: no-repeat;
+            }
+            #grad6 {
+                background-repeat: round;
+            }
+            #grad7 {
+                background-repeat: space;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h3>背景图像重复 : 设置如何平铺对象的 background-image 属性。</h3>
+
+        <div class="grad" id="grad2"></div>
+        <div class="grad" id="grad3"></div>
+        <div class="grad" id="grad4"></div>
+        <div class="grad" id="grad5"></div>
+        <div class="grad" id="grad6"></div>
+        <div class="grad" id="grad7"></div>
+
+        <div class="info">
+            <p><strong>注意：</strong></p>
+            <p><strong></strong>IE8以及更早版本的浏览器不支持多个背景图像在一个元素。</p>
+            <p><strong></strong>IE7和更早的版本不支持"inherit（继承）"的值。 IE8需要定义！DOCTYPE。 IE9支持"inherit（继承）"。</p>
+            <p><strong></strong>IE8及更早浏览器不支持为background-repeat定义2个参数值；不支持CSS3新增参数值round | space。</p>
+            <p><strong></strong>Firefox4.0-8.0不支持为background-repeat定义2个参数值；不支持CSS3新增参数值round | space。</p>
+            <p><strong></strong>Safari5.1已接受CSS3新增参数值round | space，但还未实现支持。 </p>
+            <p><strong></strong>Chrome13.0-16.0已接受CSS3新增参数值round | space，但还未实现支持。 </p>
+            <p><strong>CSS 语法 </strong></p>
+            <p><strong></strong></p>
+            <p><strong>JS 语法 </strong></p>
+            <p><strong></strong>object object.style.backgroundRepeat="repeat-y"</p>
+            <p><strong>定义与用法</strong></p>
+            <p><strong></strong></p>
+            <p><strong>提示</strong></p>
+            <p><strong></strong>background-position属性设置背景图像位置。如果指定的位置是没有任何背景，图像总是放在元素的左上角。</p>
+            <p><strong></strong></p>
+
+            <table>
+                <tr>
+                    <th>值</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>repeat</td>
+                    <td>背景图像将向垂直和水平方向重复。这是默认</td>
+                </tr>
+                <tr>
+                    <td>repeat-x</td>
+                    <td>只有水平位置会重复背景图像</td>
+                </tr>
+                <tr>
+                    <td>repeat-y</td>
+                    <td>只有垂直位置会重复背景图像</td>
+                </tr>
+                <tr>
+                    <td>no-repeat</td>
+                    <td>background-image不会重复</td>
+                </tr>
+                <tr>
+                    <td>inherit</td>
+                    <td>指定background-repea属性设置应该从父元素继承</td>
+                </tr>
+                <tr>
+                    <td>round</td>
+                    <td>背景图像自动缩放直到适应且填充满整个容器。（CSS3）</td>
+                </tr>
+                <tr>
+                    <td>space</td>
+                    <td>背景图像以相同的间距平铺且填充满整个容器或某个方向。（CSS3） </td>
+                </tr>
+            </table>
+              
+             
+            	
+            	
+        </div>
+
+    </body>
+
+</html>

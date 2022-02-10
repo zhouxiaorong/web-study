@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在Vue中使用 animate.css 库</title>
+    <script src="/common/js/vue.js"></script>
+    <link rel="stylesheet" href="/common/js/animate.min.css">
+    <style>
+        /* 自定义命名 + 使用 @keyframes start */
+        @keyframes bounce-in {
+            0% {transform: scale(0);}
+            50% {transform: scale(1.5);}
+            100% {transform: scale(1);}
+        }
+        .active {
+            /* 防止放大缩小出现问题 */
+            transform-origin: left center;
+            animation: bounce-in 1s;
+        }
+        .leave {
+            /* 防止放大缩小出现问题 */
+            transform-origin: left center;
+            animation: bounce-in 1s reverse;
+        }
+        /* 自定义命名 end */
+    </style>
+</head>
+<body>
+    <div id="root">
+        <button @click="handleBtnClick">切换</button>
+
+        <!-- 自定义命名 -->
+        <transition name="fade" 
+                    enter-active-class="active"
+                    leave-active-class="leave"
+        >
+            <div v-if="show">if hello world</div>
+        </transition>
+
+        <!-- 使用 animate.css 库 -->
+        <transition name="fade" 
+                    enter-active-class="animate__animated animate__swing"
+                    leave-active-class="animate__animated animate__shakeX"
+        >
+            <!-- v-if -->
+            <div v-if="show">if hello world</div>
+        </transition>
+    </div>
+
+    <!-- 
+        自定义命名
+            从隐藏到显示: enter-active-class="active"
+            从显示到隐藏: leave-active-class="leave"
+
+        使用 animate.css 库
+            自定义命名
+                从隐藏到显示: enter-active-class="animate__animated 动画名"
+                从显示到隐藏: leave-active-class="animate__animated 动画名"
+
+     -->
+
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                show: true,
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.show = !this.show;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

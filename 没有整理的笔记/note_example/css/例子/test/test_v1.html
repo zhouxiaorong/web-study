@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="test_v1.css">
+    <style>
+    .squares {height:100px;display:inline-block;}
+    .squares_4 {
+        width:100px;
+        /* background-image: repeating-linear-gradient(-45deg,#6a6acf,#6a6acf 5px,#c0c05d 5px,#c0c05d 10px); */
+        background-image: repeating-linear-gradient(45deg,#6a6acf,#6a6acf 5px,#c0c05d 5px,#c0c05d 10px),
+        repeating-linear-gradient(45deg,#6a6acf,#6a6acf 5px,#c0c05d 5px,#c0c05d 10px);
+    }
+    </style>
+    <script>
+    function m_test_1(){
+        this.name ="mia";
+        this.age = "18";
+        this.getAge = function(){
+            return age;
+        }
+    }
+    m_test_1.prototype.getName = function(){
+        return this.name;
+    }
+    m_test_1.prototype.toSring = function(){
+        return {name:this.name, age:this.age};
+    }
+
+    var m_test_2 = {
+        name : "mia",
+        age : "18",
+        getAge : function(){
+            return this.age;
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- <div class="squares squares_1"></div> -->
+    <!-- <div class="squares squares_2"></div> -->
+    <!-- <div class="squares squares_3"></div> -->
+    <div class="squares squares_4"></div>
+</body>
+</html>

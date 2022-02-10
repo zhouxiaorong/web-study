@@ -1,4 +1,7 @@
 node_modules/
+git/
+package-lock.json
+**/dist/*
 /dist/
 .history/
 

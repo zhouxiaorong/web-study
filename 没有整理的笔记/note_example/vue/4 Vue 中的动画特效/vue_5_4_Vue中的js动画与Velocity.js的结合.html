@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的js动画与Velocity.js的结合</title>
+    <script src="/common/js/vue.js"></script>
+    <script src="/common/js/velocity.js"></script>
+    <!-- http://velocityjs.org/#duration -->
+</head>
+<body>
+    <div id="root">
+        <button @click="handleClick">toggle</button>
+        <transition name="fade"
+                    @before-enter="handleBeforeEnter"
+                    @enter="handleEnter"
+                    @after-enter="handleAfterEnter"
+        >
+            <div v-show="show">Hello World</div>
+        </transition>
+    </div>
+
+    <!-- 
+        入场动画事件
+            @before-enter 事件
+
+            @enter 事件
+                当 @before-enter 事件结束之后，运行动画效果时，动画效果都写在这个事件中
+            
+            @after-enter
+                当 done 调用之后， 触发的事件
+        
+        出场动画事件
+            用法同 ‘入场动画事件’
+            @before-leave 事件
+            @leave 事件
+            @after-leave 事件
+
+        Velocity.js 库
+            1. 添加 js
+            2. Velocity(el, {opacity: 1}, {duration: 1000, complete: done});
+     -->
+
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                show: true,
+            },
+            methods: {
+                handleClick: function(){
+                    this.show = !this.show;
+                },
+                handleBeforeEnter: function(el){
+                    el.style.opacity = 0;
+                },
+                handleEnter: function(el, done){
+                    Velocity(el, {opacity: 1}, {duration: 1000, complete: done});
+                },
+                handleAfterEnter: function(el){
+                    console.log('动画结束')
+                }
+            }
+        })
+
+        // var vm = new Vue({
+        //     el: '#root',
+        //     data: {
+        //         show: true,
+        //     },
+        //     methods: {
+        //         handleClick: function(){
+        //             this.show = !this.show;
+        //         },
+        //         handleBeforeEnter: function(el){
+        //             el.style.color = 'red'
+        //         },
+        //         handleEnter: function(el, done){
+        //             setTimeout(() => {
+        //                 el.style.color = 'green'
+        //             }, 2000);
+        //             setTimeout(() => {
+        //                 // 动画结束之后要手动调 done，告诉 vue 动画已经执行结束
+        //                 done();
+        //             }, 4000);
+        //         },
+        //         handleAfterEnter: function(el){
+        //             el.style.color = 'black';
+        //         }
+        //     }
+        // })
+    </script>
+</body>
+</html>

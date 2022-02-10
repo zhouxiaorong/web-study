@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的动画封装</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <button @click="handleBtnClick">toggle</button>
+
+        <fade :show="show">
+            <div>hello world</div>
+        </fade>
+
+        <fade :show="show">
+            <div>bye world</div>
+        </fade>
+    </div>
+
+    <!-- 
+        动画封装
+            添加子组件
+     -->
+
+    <script>
+        Vue.component('fade', {
+            props: ['show'],
+            template: `
+                <transition @before-enter="handleBeforeEnter"
+                            @enter="handleEnter"
+                >
+                    <slot v-if="show"></slot>
+                </transition
+            `,
+            methods: {
+                handleBeforeEnter: function(el){
+                    el.style.color = 'red'
+                },
+                handleEnter: function(el, done){
+                    setTimeout(() => {
+                        el.style.color = 'green';
+                        done();
+                    }, 2000);
+                }
+            }
+        })
+
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                show: true
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.show = !this.show;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

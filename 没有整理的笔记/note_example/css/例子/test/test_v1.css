@@ -1,0 +1,36 @@
+
+.squares_1 {width:100px;
+    /* background-image: linear-gradient(to right, transparent, red); */
+    /* background-image: linear-gradient(to right, transparent 50%, red 50%); */
+    /* background-image: linear-gradient(-45deg, red, yellow); */
+    /* background-image: linear-gradient(to left top, red, yellow); */
+    /* background-image: linear-gradient(-45deg, red 0%, red 50%, yellow 50%, yellow 100%); */
+    /* background-image: linear-gradient(to left top, red 0%, red 50%, yellow 50%, yellow 100%); */
+    background-image: linear-gradient(-45deg, transparent 49%, red 49%, red 51%, transparent 51%), 
+                        linear-gradient(45deg, transparent 49%, red 49%, red 51%, transparent 51%);
+}
+.squares_2 {width:150px;height:100px;
+    /* background-image: radial-gradient(closest-side,#95d1e0, #e29881); */
+    /* background-image: radial-gradient( at right bottom ,#95d1e0 10%,#95d1e0,#e29881 50%); */
+    /* background-image: radial-gradient(at 0% 80%,#95d1e0, #d387e6,#f0aadb,#e29881); *
+    background: -moz-radial-gradient(80% 20%, closest-corner, #ace, #f96);/* -moz-radial-gradient( [ || ,]? [ || ,]? , [, ]* ) */
+    background: -webkit-gradient(radial, 80% 20%, 0, 80% 40%, 100, from(#ace), to(#f96));/* Safari 4-5, Chrome 1-9 */
+    /* background: -webkit-radial-gradient(80% 20%, closest-corner, #ace, #f96); *//* Safari 5.1+, Chrome 10+ */
+    /* background-image: radial-gradient(); */
+}
+.squares_3 {
+    width:100px;
+    background-color: red;
+    background: url("/images/img-3.jpg") no-repeat;
+    background-size: 100% 100%;
+    border:10px dashed #92b901;
+    background-clip: border-box;
+    /* background-origin: border-box; */
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+    -ms-background-clip: border-box;
+    -o-background-clip: border-box;
+    /* background-clip: border-box; */
+    /* -webkit-background-origin:content-box; */
+    /* -webkit-background-clip:padding-box; 　　 */
+}

@@ -1,0 +1,23 @@
+{
+  "name": "demo-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "config": {
+    "pages": "zxr"
+  },
+  "pages": {
+    "one": "name"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^4.5.1",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.1.2"
+  }
+}

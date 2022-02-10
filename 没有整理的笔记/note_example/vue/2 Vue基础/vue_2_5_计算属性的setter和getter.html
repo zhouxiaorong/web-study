@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性的setter和getter</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div>{{fullName}}</div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                firstName: "Dell",
+                lastName: "Lee",
+            },
+            computed: {
+                fullName: {
+                    get: function(){
+                        console.log('执行fullName2.get');
+                        return this.firstName + " " + this.lastName;
+                    },
+                    set: function(value){
+                        console.log('执行fullName2.set:'+value);
+                        var arr = value.split(' ');
+                        this.firstName = arr[0];
+                        this.lastName = arr[1];
+                    }
+                }
+            },
+        });
+    </script>
+
+    <!-- 
+        注意点：{{}} v-text v-html 中不仅可以写变量，也可以写 js 表达工
+     -->
+</body>
+</html>

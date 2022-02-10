@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="demo"></div>
+  <input id="but0" type="button" onclick="func0()" value="效率低" />
+  <input id="but1" type="button" onclick="func1()" value="效率低" />
+  <input id="but2" type="button" onclick="func2()" value="效率高" />
+  <script>
+    function func0() {
+      var start = new Date().getTime();
+      var sum = 0, num1 = 1, num2 = 2;
+      for (var i = 0; i < 10000; i++) {
+        var func = new Function("sum+=num1;num1+=num2;num2++;");
+        func();
+      }
+      var end = new Date().getTime();
+      // console.log("func1 用时:" + (end - start) + "毫秒,sum:"+sum+',num1:'+num1+',num2:'+num2);
+    }
+    function func1() {
+      var start = new Date().getTime();
+      var sum = 0, num1 = 1, num2 = 2;
+      for (var i = 0; i < 1000; i++) {
+        eval("sum+=num1;num1+=num2;num2++;");
+      }
+      var end = new Date().getTime();
+      console.log("func1 用时:" + (end - start) + "毫秒,sum:"+sum+',num1:'+num1+',num2:'+num2);
+    }
+
+    function func2() {
+      var start = new Date().getTime();
+      var sum = 0, num1 = 1, num2 = 2;
+      for (var i = 0; i < 1000; i++) {
+        sum += num1;
+        num1 += num2;
+        num2++;
+      }
+      var end = new Date().getTime();
+      console.log("func2 用时:" + (end - start) + "毫秒,sum:"+sum+',num1:'+num1+',num2:'+num2);
+    } </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 实例</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- : 为 v-bind: 的简写 ， @delete 为 v-on:delete 简写 -->
+        <div v-on:click="handleClick">
+            {{message}}
+        </div>
+    </div>
+
+    <script>
+        // 一个Vue的项目，是由好多个小的组件组成的，也可以理解成是由很多很多Vue实例拼装组成的
+        // new Vue 是一个根实例，Vue 中的每一个组件，也是一个实例
+        // 创建实例,接管页面上某一部分 dom 的渲染
+        var vm = new Vue({
+            // 负责定义这个 Vue 实例接管的 dom 的最外层的标签
+            el: '#root',
+            // 存放数据
+            data: {
+                message: 'hello world'
+            },
+            // 自定义方法
+            methods: {
+                handleClick: function(){
+                    alert('click')
+                }
+            }
+        });
+
+        // vm.$data; // data 对象
+        // vm.$el; // id元素
+        // 凡是以 $ 开头的东西，指的都是 Vue 的实例属性或实例方法
+
+        // vm.$destroy();// 销毁 vm 实例，销毁后，双向绑定功能不存在，不过之前绑定的事件还遗留着并没有销毁完全
+
+    </script>
+</body>
+</html>

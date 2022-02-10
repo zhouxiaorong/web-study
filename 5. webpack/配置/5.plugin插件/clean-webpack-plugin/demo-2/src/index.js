@@ -1,0 +1,1 @@
+document.write('clean-webpack-plugin demo-2 index.js')

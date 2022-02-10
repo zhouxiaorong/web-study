@@ -1,0 +1,20 @@
+{
+  "name": "demo-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "default": "webpack index.js",
+    "dev": "webpack index.js -o dist/bundle_dev.js --mode=development",
+    "build": "webpack index.js -o dist/bundle_prod.js --mode production",
+    "prod": "webpack-dev-server index.js -o bundle.js --open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14"
+  }
+}

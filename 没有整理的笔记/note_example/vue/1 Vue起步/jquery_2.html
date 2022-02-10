@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="../../../common/js/jquery-1.8.0.min.js"></script> -->
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" class="content">
+        <button class="submit">提交</button>
+        <ul class="list"></ul>
+    </div>
+
+    <script>
+        function Page(params) {
+          let defaultParams = {
+            el: 'con'
+          }
+          Object.assign(this, defaultParams , params);
+        }
+        Page.prototype.init = function(){
+          console.log('init');
+          this.dom = document.getElementById(this.el)
+          this.bindEvents()
+        }
+        Page.prototype.addEvent = function(element, e, fn) {
+          console.log('addEvent');
+          //firefox使用addEventListener，来添加事件
+          if(element.addEventListener) {
+            element.addEventListener(e,fn,false);
+          }
+          //ie使用attachEvent，来添加事件
+          else {
+            element.attachEvent("on"+e,fn);
+          }
+        }
+        Page.prototype.bindEvents = function(){
+          console.log('bindEvents');
+          var btn = this.dom.getElementsByTagName('button')[0];
+          console.log('bindEvents');
+          this.addEvent(btn, 'click',this.handleBtnClick);
+        }
+        Page.prototype.handleBtnClick = function(){
+          var $input = this.dom.getElementsByTagName('input')[0];
+          var $list = this.dom.getElementsByTagName('ul')[0];
+          var inputValue = $input.val();
+          $list.append('<li>' + inputValue + '</li>');
+          $input.val('');
+        }
+        var page = new Page({
+          el: 'app'
+        });
+        page.init();
+
+    </script>
+</body>
+
+</html>

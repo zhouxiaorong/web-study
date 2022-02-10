@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的条件渲染</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 条件判断 -->
+        <div v-if="show">{{message}}</div>
+        <div v-else>Bye World</div>
+        
+        <!-- 条件判断 -->
+        <div v-if="name === 'a'">name: aaaaa</div>
+        <div v-else-if="name === 'b'">name: bbbbb</div>
+        <div v-else>name: ccccc</div>
+
+        <!-- input 标签复用 -->
+        <div v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" >
+        </div>
+        <div v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" >
+        </div>
+        
+        <!-- input 标签不复用（添加 key） -->
+        <div v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+        </div>
+        <div v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+        </div>
+
+        <!-- 标签展示判断 -->
+        <div v-show="show">{{message}}</div>
+    </div>
+
+    <!-- 
+        v-if 指令
+            v-if="js表达式"
+            说明：
+                1. 通过v-if指令结合js表达式的返回值（true/false），决定一个标签是否在页面上展示
+                2. 未渲染，在页面上不存在
+                3. 不推荐同时使用 v-if 和 v-for，当 v-if 与 v-for 一起使用时，v-for 具有比 v-if 更高的优先级
+
+        v-else-if
+            说明
+                1. 当 v-if 中的js表达式结果为 false 时，再计算 v-else-if 中的表达式，当结果为 true 时，展示该标签内容
+                2. 类似于 v-else，v-else-if 也必须紧跟在带 v-if 或者 v-else-if 的元素之后带有 v-show 的元素始终会被渲染并保留在 DOM 中。
+        
+        v-else
+            说明 
+                1. 当 v-if 中的js表达式结果为false时，展示 v-else 标签里的内容
+                2. v-else 元素必须紧跟在带 v-if 或者 v-else-if 的元素的后面，否则它将不会被识别。
+        
+        用 key 管理可复用的元素
+            前情提要：
+                Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染（使 Vue 变得非常快，将不会清除复用的input标签用户已经输入的内容）
+            解决：
+                <input key="name" />
+                <input key="password" />
+            说明
+                表达了这两个元素是独立的，不要复用它们
+
+        v-show 指令
+            v-show="js表达式"
+            说明：
+                1. 通过v-if指令结合js表达式的返回值（true/false），决定一个标签是否在页面上展示（存在）
+                2. v-show 只是简单地切换元素的 CSS 属性 display
+                3. v-show 不支持 <template> 元素，也不支持 v-else
+
+        v-show 与 v-if 比较
+            相同点：都能够控制一个模板标签是否在页面上展示
+            不同点：
+                js表达式结果换为 false时，v-if会从页面上直接移除，而 v-show 则会以 display:none 方式隐藏
+            说明 ：
+                一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+     -->
+
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                message: 'hello world',
+                show: false,
+                name: 'a',
+                loginType: 'name'
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的列表过渡</title>
+    <script src="/common/js/vue.js"></script>
+    <style>
+        .v-enter, v-leave {opacity: 0;}
+        .v-enter-active, .v-leave-active {transition: opacity 3s;}
+    </style>
+</head>
+<body>
+    <div id="root">
+        <button @click="handleBtnClick">Add</button>
+
+        <transition-group>
+            <div v-for="(item, index) of list" :key="item.id">
+                {{item.id}} --- {{item.title}}
+            </div>
+        </transition-group>
+
+    </div>
+
+    <!-- 
+        列表过渡
+            1. 在列表代码外套一层 <transition-group></transition-group>
+            2. 添加 .v-enter, v-leave 等动画
+            说明：
+                相当于给列表每一项外都套了一层<transition></transition>
+     -->
+
+    <script>
+        var count = 0;
+
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                list: []
+            },
+            methods: {
+                handleBtnClick: function(){
+                    this.list.push({
+                        id: ++count,
+                        title: 'hello world'
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

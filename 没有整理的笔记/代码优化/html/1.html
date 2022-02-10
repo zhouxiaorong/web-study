@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" value="效率低" onclick="func1()" />   
+  <input type="button" value="效率高" onclick="func2()" /> 
+  <div class="one" id="one"></div>   
+  <script>
+    //效率低的   
+    function func1(){   
+        var start = new Date().getTime();   
+        var template = "";   
+        for(var i = 0; i < 1000000; i++){   
+            template += i == 0 ? '': ', ' + "i:" + i;   
+        }   
+        var end = new Date().getTime();
+        // document.getElementById("one").innerHTML = template;   
+        // document.getElementById("one").innerHTML += '<p>'+ template.length +'</p>';   
+        console.log("func1 用时:" + (end - start) + "毫秒, "+ template.length);   
+    }   
+    //效率高的   
+    function func2(){   
+        var start = new Date().getTime();   
+        var array = [];   
+        for(var i = 0; i < 1000000; i++){
+            array[i] = i == 0 ? '': ', ' + "i:" + i;   
+        }   
+        var end = new Date().getTime();   
+        // document.getElementById("one").innerHTML += '<p>'+ array.join("").length +'</p>';  
+        // document.getElementById("one").innerHTML = array.join("").length;   
+        console.log("func2 用时:" + (end - start) + "毫秒, "+ array.join("").length);   
+    }   
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .squares_1 {
+        background-image: unset;/*未设置值*/
+        background-image: inherit;/*继承父类*/
+        background-image: initial;/*默认*/
+        background-image: url(图片地址);/*图片*/
+        /*线性渐变*/
+        background-image: linear-gradient();
+        background-image: -moz-linear-gradient();
+        background-image: -o-linear-gradient();
+        background-image: -webkit-linear-gradient();
+        /*径向渐变*/
+        background-image: radial-gradient();
+        background-image: -moz-radial-gradient();
+        background-image: -webkit-radial-gradient();
+        /*重复线性渐变*/
+        background-image: repeating-linear-gradient();
+        background-image: -moz-repeating-linear-gradient();
+        background-image: -webkit-repeating-linear-gradient();
+        /*重复径向渐变*/
+        background-image: repeating-radial-gradient();
+        background-image: -moz-repeating-radial-gradient();
+        background-image: -o-repeating-linear-gradient();
+        background-image: -webkit-repeating-radial-gradient();
+
+        
+        /*第一个参数为linear 时， 和-webkit-linear-gradient没区别。*/
+        background-image: -webkit-gradient(linear);
+        /*
+            cross-fade()
+            表达式： <image-combination> = cross-fade( <image>, <image>, <percentage> )
+            实例： background-image: -webkit-cross-fade(url(1.jpg), url(2.jpg), 50%);
+            说明： cross-fade中的透明度值是只作用于后面一张图片上！
+                  仅Chrome以及Safari 6支持该CSS3属性；IE10以及FireFox浏览器是否支持该属性还不得而知。
+                  纯当扩充眼界，增加见识。基本上无法再实际项目中应用。
+        */
+        background-image: cross-fade(url(1.jpg), url(2.jpg), 50%); 
+        /*
+            语法：image-set() = image-set( <image-set-option># )
+                <image-set-option> = [ <image> | <string> ] <resolution>
+
+            说明：image-set() 可以根据用户设备的分辨率匹配合适的图像。 为不同的设备分配合适得图像;
+            示例：div {
+                    background-image: image-set( &quot;test.png&quot; 1x, &quot;test-2x.png&quot; 2x, &quot;test-print.png&quot; 600dpi );
+                }
+            注意点，目前带有-webkit-的这些浏览器支持的语法是：image-set( <url> | <string> )，写法如下：
+                div {
+                    background-image: image-set( url(test.png) 1x, url(test-2x.png) 2x );
+                }
+        */
+        background-image: image-set("test.png" 1x, "test-2x.png" 2x, "test-print.png" 600dpi);
+        background-image: -webkit-image-set();
+        /* background-image: image(); 不知道什么用 */
+        /* background-image: element();不知道什么用 */
+        /* background-image: -moz-element(); */
+    }
+    </style>
+</head>
+<body>
+    <div class="squares_1"></div>
+</body>
+</html>

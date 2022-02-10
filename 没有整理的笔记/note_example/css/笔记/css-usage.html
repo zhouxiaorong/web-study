@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="direction,unicode-dibi"/>
+    <meta name="description" content="《CSS世界》读后感"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css 属性</title>
+    <link rel="stylesheet" href="../stu/css/base.css">
+    <link rel="stylesheet" href="../scss/css-usage.css">
+    <script src="../../base/js/jquery-1.8.0.min.js"></script>
+    <style>
+      .container {font-size: 16px;height:100%;overflow: hidden;}
+      .left, .right {display:inline-block;overflow: auto;height: 100%;vertical-align: top;}
+      .left {width:18%;}
+      .left .list {position: fixed;top:0px;left: 0px;line-height: 1.6em;height:1.8em;}
+      .left ul {font-size: 25px;}
+      .left ol {font-size: 18px;padding-left:35px;}
+
+      .right {width:81%;}
+      .right .module {padding:30px 50px}
+      .right .module h1{margin-bottom:10px;}
+
+      /* direction - 改变按钮元素在 DOM 流中的顺序 */
+      .right .direction-exam-1 {text-align: center;display: inline-block;border: 1px solid #ddd;padding: 10px;}
+      .right .direction-exam-1 button {margin:0px 10px;}
+
+      /* direction - 省略前面的文字 */
+      .right .direction-exam-2 .ell { width: 240px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;} 
+
+      /* direction - 改变表格中列的呈现顺序 */
+      .right .direction-exam-3 table { width: 48%;display: inline-block;} 
+      .right .direction-exam-3 table:nth-child(2) {direction: rtl;} 
+      .right .direction-exam-3 table:nth-child(2) tr {direction: ltr;} 
+
+      /* unicode-bidi - 指定中文每个字符都反向呈现 */
+      .right .unicode-dibi-exam-1 .rtl {direction: rtl;unicode-bidi: bidi-override; }
+      .right .unicode-dibi-exam-1 .rtl > span {background-color: #ddd; }
+
+      /* word-wrap - 设置对象中的单词之间间隔 */
+      .word-wrap-exam-1 p {width:13em; border:1px solid #000000;display:inline-block;margin-right: 30px;}
+      .word-wrap-exam-1 p.test{word-wrap:break-word;}
+
+      @media screen and (max-width: 480px) { 
+
+          /* direction - 根据设备改变按钮元素在 DOM 流中的顺序 */
+          .right .direction-exam-1 {direction: rtl;}
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left"><div class="list">
+            <ul>
+                <li><a href="#direction">direction</a></li>
+                <ol>
+                    <li><a href="#direction-exam-1">改变元素流向</a></li>
+                    <li><a href="#direction-exam-2">省略前面的文字</a></li>
+                    <li><a href="#direction-exam-3">改变表格中列的呈现顺序</a></li>
+                </ol>
+            </ul>
+            <ul>
+                <li><a href="#unicode-dibi">unicode-dibi</a></li>
+                <ol>
+                    <li><a href="#unicode-dibi-exam-1">指定中文每个字符都反向呈现</a></li>
+                </ol>
+            </ul>
+            <ul>
+                <li><a href="#word-wrap">word-wrap</a></li>
+                <ol>
+                    <li><a href="#word-wrap-exam-1">只在允许的断字点换行</a></li>
+                    <li><a href="#word-wrap-exam-2">不允许长单词换行到下一行</a></li>
+                </ol>
+            </ul>
+        </div></div>
+        <div class="right">
+            <div class="right-ie-base">
+                <div class="module direction">
+                    <h1 id="direction">direction<span>改变水平流向</span><strong>direction: ltr（默认值） | rtl | inherit;</strong></h1>
+
+                    <h2>注意点</h2>
+                    <ol class="explain">
+                        <li>ltr: 文本方向从左到右, left to right</li>
+                        <li>rtl: 文本方向从右到左, right to left</li>
+                        <li>inherit: 从父类 direction 属性继承</li>
+                        <li>在不支持 text-align:start/end 的浏览器中（如 IE），不同的 direction 属性值会改变 text-align 属性的初始值：当 direction 值为 ltr 的时候，text-align 的初始值是 left；当 direction 值为 rtl 的时候，text-align 的初始值是 right。</li>
+                    </ol>
+        
+                    <h2 id="direction-exam-1">改变按钮元素在 DOM 流中的顺序</h2>
+                    <div class="direction-exam-1" dir="ltr">
+                        <button class="success">确定</button><button class="cancel">取消</button><button class="back">返回</button>
+                    </div>
+                    <div class="direction-exam-1" dir="rtl">
+                        <button class="success">确定</button><button class="cancel">取消</button><button class="back">返回</button>
+                    </div>
+
+                    <h2 id="direction-exam-2">省略前面的文字</h2>
+                    <div class="direction-exam-2">
+                        <p class="ell" dir="ltr">开头是我，这是中间，然后就是结束</p> 
+                        <p class="ell" dir="rtl">开头是我，这是中间，然后就是结束</p>
+                        <p dir="rtl" style="unicode-bidi: bidi-override;"><span style="unicode-bidi: plaintext;">unicode-bidi: plaintext;</span>开头是我，这是中间，然后就是结束</p>
+                    </div>
+
+                    <h2 id="direction-exam-3">改变表格中列的呈现顺序</h2>
+                    <div class="direction-exam-3">
+                        <table class="reference ">
+                            <tbody>
+                                <tr><th>值</th><th>描述</th></tr>
+                                <tr><td>ltr</td><td>默认。文本方向从左到右。</td></tr>
+                                <tr><td>rtl</td><td>文本方向从右到左。</td></tr>
+                                <tr><td>inherit</td><td>规定应该从父元素继承 direction 属性的值。</td></tr>
+                            </tbody>
+                        </table>
+                        <table class="reference" dir="rtl">
+                            <tbody>
+                                <tr><th>值</th><th>描述</th></tr>
+                                <tr><td>ltr</td><td>默认。文本方向从左到右。</td></tr>
+                                <tr><td>rtl</td><td>文本方向从右到左。</td></tr>
+                                <tr><td>inherit</td><td>规定应该从父元素继承 direction 属性的值。</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="module unicode-dibi">
+                    <h1 id="unicode-dibi">unicode-dibi<span>设置文本重写</span><strong>unicode-bidi: normal | embed | bidi-override | initial | inherit;</strong></h1>
+
+                    <h2>注意点</h2>
+                    <ol class="explain">
+                        <li>normal: 默认。不使用附加的嵌入层面。正常排列。（假设设置了 direction:rtl，则图片、按钮以及问号、加号之类的字符会从右往左显示，但是中文、英文字符还是从左往右显示。）</li>
+                        <li>embed: 创建一个附加的嵌入层面。独立内嵌，不受外部影响；要想起作用，只能作用在内联元素上（在通常情况下，embed属性值的表现和 normal 是一样的）。</li>
+                        <li>bidi-override: 创建一个附加的嵌入层面。重新排序取决于 direction 属性。</li>
+                        <li>unicode-bidi 属性与 direction 属性一起使用，来设置或返回文本是否被重写，以便在同一文档中支持多种语言。</li>
+                    </ol>
+
+                    <h2 id="unicode-dibi-exam-1">指定中文每个字符都反向呈现（unicode-bidi + direction）</h2>
+                    <div class="unicode-dibi-exam-1">
+                        <p class="rtl">normal:开头是我，<span style="unicode-bidi:normal;">这是中间</span>，然后是结束</p> 
+                        <p class="rtl">embed:开头是我，<span style="unicode-bidi:embed;">这是中间</span>，然后是结束</p>
+                    </div>
+
+                </div>
+                <div class="module writing-mode">
+                    <!-- 火狐41+ -->
+                    <h1 id="writing-mode">
+                        <span>定义了文本在水平或垂直方向上如何排布。</span>
+                        <strong>writing-mode: horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr</strong>
+                    </h1>
+
+                    <h2>注意点</h2>
+                    <ol class="explain">
+                        <li></li>
+                        <li>全局值—关键字 inherit，IE8 及以上版本浏览器支持；initial 和 unset，IE13 才支持</li>
+                    </ol>
+
+                    <h2 id="writing-mode-exam-1"></h2>
+                    <div class="writing-mode-exam-1">
+                    </div>
+                </div>
+                <div class="module letter-spacing"></div>
+                <div class="module word-spacing"></div>
+                <div class="module white-space">
+                    <h1 id="white-space">white-space<span>控制空白字符的显示，是否自动换行</span><strong>white-space:normal | nowrap | pre | pre-wrap | pre-line</strong></h1>
+                    <div class="module-con">
+                        <h2>注意点</h2>
+                        <ol class="explain">
+                            <li>normal: 不保留换行符，空格合并成一个，会自动换行</li>
+                            <li>nowrap: 强制不换行，空格合并成一个（在同一行内显示所有文本，直到文本结束或者遇到<br> 标签）</li>
+                            <li>pre: 保留换行符、空格，不会自动换行，preserve的缩写。（行为方式类似 HTML 中的 pre 标签）</li>
+                            <li>pre-wrap: 保留换行符、空格，行前的空格超出一行时会换行，会自动换行，preserve + wrap</li>
+                            <li>pre-line: 保留换行符，空格合并成一个，会自动换行，preserve + new line + wrap</li>
+                        </ol>
+
+                        <h2 id="white-space-exam-1">对比样例：</h2>
+                        <div class="white-space-exam-1">
+                            <p>
+                                Hi&nbsp;&nbsp;,
+                                This   is a incomprehensibilities 
+                                 long word.
+                                <br />
+                                你好&nbsp;&nbsp;，
+                                这   是一个不可思议的长单词
+                            </p>
+                            <p style="white-space: nowrap;">
+                                Hi&nbsp;&nbsp;,
+                                This   is a incomprehensibilities 
+                                 long word.
+                                <br />
+                                你好&nbsp;&nbsp;，
+                                这   是一个不可思议的长单词
+                            </p>
+                            <p style="white-space: pre;">
+                                Hi&nbsp;&nbsp;,
+                                This   is a incomprehensibilities 
+                                 long word.
+                                <br />
+                                你好&nbsp;&nbsp;，
+                                这   是一个不可思议的长单词
+                            </p>
+                            <p style="white-space: pre-wrap;">
+                                Hi&nbsp;&nbsp;,
+                                  This   is a incomprehensibilities 
+                                 long word.
+                                <br />
+                                你好&nbsp;&nbsp;，
+                                这   是一个不可思议的长单词
+                            </p>
+                            <p style="white-space: pre-line;">
+                                Hi&nbsp;&nbsp;,
+                                This   is a incomprehensibilities 
+                                 long word.
+                                <br />
+                                你好&nbsp;&nbsp;，
+                                这   是一个不可思议的长单词
+                            </p>
+                            <style>
+                            .white-space-exam-1 {display: flex;justify-content: space-around;}
+                            .white-space-exam-1 p {
+                                width:100px;height:100px;border:1px solid blue;display:inline-block;}
+                            </style>
+                        </div>
+                        <!-- <h2 id="white-space-exam-2"></h2>
+                        <div class="white-space-exam-1">
+                            <p style="white-space: nowrap;">
+                                Hi&nbsp;&nbsp;,
+                                This   is a incomprehensibilities 
+                                 long word.
+                                <br />
+                                你好&nbsp;&nbsp;，
+                                这   是一个不可思议的长单词
+                            </p>
+                        </div>
+                        <h2 id="white-space-exam-3"></h2>
+                        <div class="white-space-exam-1">
+                            <p style="white-space: pre;">
+                                Hi&nbsp;&nbsp;,
+                                This   is a incomprehensibilities 
+                                 long word.
+                                <br />
+                                你好&nbsp;&nbsp;，
+                                这   是一个不可思议的长单词
+                            </p>
+                        </div>
+                        <h2 id="white-space-exam-4"></h2>
+                        <div class="white-space-exam-1">
+                            <p style="white-space: pre-wrap;">
+                                Hi&nbsp;&nbsp;,
+                                This   is a incomprehensibilities 
+                                 long word.
+                                <br />
+                                你好&nbsp;&nbsp;，
+                                这   是一个不可思议的长单词
+                            </p>
+                        </div>
+                        <h2 id="white-space-exam-5"></h2>
+                        <div class="white-space-exam-1">
+                            <p style="white-space: pre-line;">
+                                Hi&nbsp;&nbsp;,
+                                This   is a incomprehensibilities 
+                                 long word.
+                                <br />
+                                你好&nbsp;&nbsp;，
+                                这   是一个不可思议的长单词
+                            </p>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="module word-wrap">  
+                    <h1 id="word-wrap">word-wrap<span>控制长度超过一行的单词是否被拆分换行</span><strong>word-wrap：normal | break-word</strong></h1>
+                    <div class="module-con">
+                        <h2>注意点</h2>
+                        <ol class="explain">
+                            <li>是word-break的补充</li>
+                            <li>normal: 只在允许的断字点换行（浏览器保持默认处理）。允许内容顶开或溢出指定的容器边界。</li>
+                            <li>break-word: 内容在一行显示不下时，拆分换行该内容（只有长到溢出的单词才会被强制拆分换行！）</li>
+                            <li>word-wrap 属性原本属于微软的一个私有属性，在 CSS3 现在的文本规范草案中已经被重名为 overflow-wrap。word-wrap 现在被当作 overflow-wrap 的 “别名”。 稳定的谷歌 Chrome 和 Opera 浏览器版本支持这种新语法。</li>
+                        </ol>
+    
+                        <h2 id="word-wrap-exam-1">只在允许的断字点换行（word-wrap:normal;）</h2>
+                        <div class="word-wrap-exam-1">
+                            <p>This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.</p>
+                        </div>
+    
+                        <h2 id="word-wrap-exam-2">不允许长单词换行到下一行（word-wrap:break-word;）</h2>
+                        <div class="word-wrap-exam-1">
+                            <p class="test">This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="module word-break">
+                    <h1 id="word-break">word-break<span>控制单词如何被拆分换行</span><strong>word-break: normal|break-all|keep-all;</strong></h1>
+                    <div class="module-con">
+                        <h2>注意点</h2>
+                        <ol class="explain">
+                            <li></li>
+                            <li>normal: 使用浏览器默认的换行规则。</li>
+                            <li>break-all: 允许在单词内换行（所有单词碰到边界一律拆分换行）</li>
+                            <li>keep-all: 只能在半角空格或连字符处换行。（所有“单词”一律不拆分换行，只有空格可以触发自动换行）</li>
+                        </ol>
+    
+                        <h2 id="word-break-exam-1"></h2>
+                        <div class="word-break-exam-1">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="module list-style">
+                    <!--
+                        list-style-img, list-style-position, list-style-type, 
+                    -->
+                </div>
+                <div class="module font">
+                    <!--
+                        font-family, font-size, font-style, font-variant, font-weight, 
+                    -->
+                </div>
+                <div class="module text-transform"></div>
+                <div class="module text-decoration"></div>
+                <div class="module text-indent"></div>
+                <div class="module text-align"></div>
+                <div class="module text-overflow"></div>
+                <div class="module vertical-align"></div>
+
+
+                <!--
+                    不需要再说明的属性
+                    bottom, right, top, left, , , , , , , , 
+                -->
+                <div class="module background"></div>
+                <div class="module background-color"></div>
+                <div class="module background-image"></div>
+                <div class="module background-position"></div>
+                <div class="module background-repeat"></div>
+                <div class="module background-attachment"></div>
+                <div class="module border">
+                    <!-- 
+                        border-top, border-right, border-bottom, border-left, border-color, border-width, border-style, 
+                        border-top-color, border-right-color, border-bottom-color, border-left-color,
+                        border-top-width, border-right-width, border-bottom-width, border-left-width,
+                        border-top-style, border-right-style, border-bottom-style, border-left-style,
+                        border-collapse
+                    -->
+                </div>
+                <div class="module clear"></div>
+                <div class="module color"></div>
+                <div class="module cursor"></div>
+                <div class="module display"></div>
+                <div class="module float"></div>
+                <div class="module z-index"></div>
+                <div class="module width"></div>
+                <div class="module override">
+                    <!-- override-x, overide-y -->
+                </div>
+                <div class="module line-height"></div>
+                <div class="module table-layout"></div>
+                <div class="module margin">
+                    <!--
+                        margin-top, margin-right, margin-bottom, margin-left
+                    -->
+                </div>
+                <div class="module padding">
+                    <!--
+                        padding-top, padding-right, padding-bottom, padding-left
+                    -->
+                </div>
+
+                <!-- IE7+ -->
+                <div class="module max-height"></div>
+                <div class="module max-width"></div>
+                <div class="module min-height"></div>
+                <div class="module min-width"></div>
+                <div class="module position"></div>
+            </div>
+            <div class="right-ie8">
+                <!-- IE8+ chrome13+ 火狐4+ O11+ start -->
+                <div class="module visibility"></div>
+                <div class="module quotes"></div>
+                <div class="module content"></div>
+                <div class="module clip"></div>
+                <div class="module border-collapse">
+                    <h1 id="border-collapse">
+                        <span>设置表格的边框是分开的还是单一的</span>
+                        <strong>border-collapse: separate | collapse</strong>
+                    </h1>
+
+                    <h2>注意点</h2>
+                    <ol class="explain">
+                        <li>separate : 默认值。边框会被分开。不会忽略 border-spacing 和 empty-cells 属性。</li>
+                        <li>collapse : 边框会合并为一个单一的边框。会忽略 border-spacing 和 empty-cells 属性。</li>
+                    </ol>
+
+                    <h2 id="border-collapse-exam-1"></h2>
+                    <div class="border-collapse-exam-1">
+                    </div>
+                </div>
+                <div class="module border-spacing">
+                    <h1 id="border-spacing">
+                        <span>设置相邻单元格的边框间的距离（仅用于"边框分离"模式-border-collapse: separate;）</span>
+                        <strong>border-spacing: length</strong>
+                    </h1>
+                    <h2>注意点</h2>
+                    <ol class="explain">
+                        <li>length:规定相邻单元的边框之间的距离。使用 px、cm 等单位。不允许使用负值 </li>
+                        <li>如果定义一个 length 参数，那么定义的是水平和垂直间距。</li>
+                        <li>如果定义两个 length 参数，那么第一个设置水平间距，而第二个设置垂直间距。</li>
+                    </ol>
+
+                    <h2 id="border-spacing-exam-1"></h2>
+                    <div class="border-spacing-exam-1">
+                    </div>
+                </div>
+                <div class="module empty-cells">
+                    <h1 id="empty-cells">
+                        <span></span>
+                        <strong>empty-cells:  | </strong>
+                    </h1>
+
+                    <h2>注意点</h2>
+                    <ol class="explain">
+                        <li></li>
+                    </ol>
+
+                    <h2 id="empty-cells-exam-1"></h2>
+                    <div class="empty-cells-exam-1">
+                    </div>
+                </div>
+                <div class="module caption-side"></div>
+                <div class="module counter-increment"></div>
+                <div class="module counter-reset"></div>
+                <div class="module opacity"></div>
+                <div class="module page-break-after"></div>
+                <div class="module page-break-before "></div>
+                <div class="module page-break-inside"></div>
+                <!-- IE8+ chrome13+ 火狐4+ O11+ end -->
+                <!-- IE8+ -->
+                <div class="module outline">
+                    <!--
+                        outline-color, style，width， outline-offset(IE不兼容)， 
+                    -->
+                </div>
+                <!-- IE8 chrome10+ 火狐29+ O10+-->
+                <div class="module box-sizing"></div>
+                
+            </div>
+            <div class="right-ie9">
+                <!-- IE9+ chrome4+ 火狐4+ O10+ -->
+                <div class="moduel background-size"></div>
+                <div class="moduel background-clip"></div>
+                <div class="moduel background-origin"></div>
+
+                <!-- IE9+ chrome5+ 火狐4+ O10+ -->
+                <div class="module border">
+                    <!-- 
+                        border-radius, 
+                        border-top-left-radius, border-top-right-radius
+                        border-bottom-left-radius, border-bottom-right-radius, 
+                    -->
+                </div>
+                <div class="module height"></div>
+
+                <!-- IE9+ chrome10+ 火狐4+ O10+ -->
+                <div class="module box-shadow"></div>
+            </div>
+            <div class="right-ie10">
+                <!-- IE10+ chrome4+ 火狐4+ O10+ -->
+                <div class="module text-shadow"></div>
+    
+                <!-- IE10+ chrome36+ 火狐16+ O23+ -->
+                <div class="module ackface-visibility"></div>
+                <div class="module perspective"></div>
+                <div class="module perspective-origin"></div>
+                <div class="module transform">
+                    <!-- transform-origin, transform-style -->
+                    <!-- 3D: IE12+ chrome36+ 火狐16+ O23+ -->
+                </div>
+                <div class="module transition">
+                    <!--
+                        transition-delay, transition-duration, transition-property, ransition-timing-function, 
+                    -->
+                </div>
+    
+                <!-- IE10+ chrome43+ 火狐16+ O30+ -->
+                <div class="module animation"></div>
+                <div class="module animation-delay"></div>
+                <div class="module animation-direction"></div>
+                <div class="module animation-duration"></div>
+                <div class="module animation-fill-mode"></div>
+                <div class="module animation-iteration-count"></div>
+                <div class="module animation-name"></div>
+                <div class="module animation-play-state"></div>
+                <div class="module animation-timing-function"></div>
+    
+                <!-- IE10+ chrome50+ 火狐2+ O37+ -->
+                <div class="module column-count"></div>
+                <div class="module column-gap"></div>
+                <div class="module column-rule"></div>
+                <div class="module column-rule-color"></div>
+                <div class="module column-rule-style"></div>
+                <div class="module column-rule-width"></div>
+                <div class="module column-width"></div>
+                <div class="module columns"></div>
+    
+                <!-- IE10+ chrome50+ 火狐不支持 O37+ -->
+                <div class="module column-span"></div>
+            </div>
+            <div class="right-ie11">
+                <!-- IE11+ chrome15+ 火狐15+ O15+ -->
+                <div class="module border">
+                    <!-- 
+                        border-image-outset, border-image-repeat, border-image-slice, border-image-source, border-image-width
+                    -->
+                </div>
+    
+                <!-- IE11+ chrome21+ -->
+                <div class="module align-content"></div>
+                <div class="module align-items"></div>
+                <div class="module align-self"></div>
+    
+                <!-- IE11+ chrome29+ 火狐28+ O17+ -->
+                <div class="module flex"></div>
+                <div class="module flex-basis"></div>
+                <div class="module flex-direction"></div>
+                <div class="module flex-flow"></div>
+                <div class="module flex-grow"></div>
+                <div class="module flex-shrink"></div>
+                <div class="module flex-wrap"></div>
+                <div class="module justify-content "></div>
+                <div class="module order"></div>
+            </div>
+            <div class="right-other">
+                <!-- IE不支持 chrome4+ 火狐5+ O15+ -->
+                <div class="module resize"></div>
+    
+                <!-- IE不支持 chrome35+ 火狐30+ O22+-->
+                <div class="module background-blend-mode"></div>
+    
+                <!-- IE不支持 chrome37+ 火狐27+ O24+ -->
+                <div class="module all"></div>
+    
+                <!-- ?? -->
+                <div class="module text-align-last"></div>
+                <div class="module text-justify"></div>
+                <div class="module text-align-last"></div>
+                <div class="module filter">
+                    <!-- 滤镜 -->
+                </div>
+    
+                <!-- 规则:
+                    @font-face
+                    @keyframes IE10+ chrome43+ 火狐16+ O30+
+                    @media IE9+ chrome21+ 火狐3+ O9+
+                -->
+    
+                <!-- 所有主流浏览器都不支持 -->
+                <div class="module column-fill"></div>
+                <div class="module appearance"></div>
+                <div class="module box-align"></div>
+                <div class="module box-direction"></div>
+                <div class="module box-flex-group"></div>
+                <div class="module box-lines"></div>
+                <div class="module box-ordinal-group"></div>
+                <div class="module box-orient"></div>
+                <div class="module box-pack"></div>
+                <div class="module font-size-adjust"></div>
+                <div class="module font-stretch"></div>
+                <div class="module grid-columns"></div>
+                <div class="module grid-rows"></div>
+                <div class="module hanging-punctuation"></div>
+                <div class="module icon"></div>
+                <div class="module nav-down"></div>
+                <div class="module nav-index"></div>
+                <div class="module nav-left"></div>
+                <div class="module nav-right"></div>
+                <div class="module nav-up"></div>
+                <div class="module punctuation-trim"></div>
+                <div class="module target">
+                    <!-- target-name, target-new, target-position -->
+                </div>
+                <div class="module rotation"></div>
+                <div class="module tab-size"></div>
+                <div class="module text-decoration-color"></div>
+                <div class="module text-decoration-line"></div>
+                <div class="module text-decoration-style"></div>
+                <div class="module text-outline"></div>
+                <div class="module text-wrap"></div>
+            </div>
+            <div class="right-selector">
+                <div class="module :first-letter">
+                    <h1 id="first-letter" style="color:rgba(255, 0, 0, 0.5)">:first-letter<span>改变水平流向</span><strong></strong></h1>
+                    <div class="first-letter-1">
+                        <p>To stop the degradation of the planet's natural environment and to build a future in which humans live in harmony with nature, by; conserving the world's biological diversity, ensuring that the use of renewable natural resources is sustainable, and promoting the reduction of pollution and wasteful consumption.</p>
+                    </div>
+<style>
+.first-letter-1 p:first-letter {color:red;}
+.first-letter-1 p:first-line {background-color: cornflowerblue;}
+</style>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

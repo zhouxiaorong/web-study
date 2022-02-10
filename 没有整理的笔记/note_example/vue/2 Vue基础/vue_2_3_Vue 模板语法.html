@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 模板语法</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- chazhi表达式 -->
+        {{message + ' Lee'}}
+
+        <!-- v-text: 让 message 变成表达式，显示 vm 中 message 的数据 -->
+        <div v-text="message + ' Lee'"></div>
+
+        <!-- v-html -->
+        <div v-html="message + ' Lee'"></div>
+
+        <div v-on:click="handleClick"></div>
+
+        <div v-bind:title="message">123</div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                message: '<h1>hello world</h1>'
+            },
+        });
+    </script>
+
+    <!-- 
+        注意点：{{}} v-text v-html 中不仅可以写变量，也可以写 js 表达工
+     -->
+</body>
+</html>

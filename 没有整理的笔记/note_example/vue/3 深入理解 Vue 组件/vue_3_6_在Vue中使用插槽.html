@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在Vue中使用插槽（slot）</title>
+    <script src="/common/js/vue.js"></script>
+
+    <style>
+        body, div, p {
+            padding:0px;
+            margin:0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        
+        <child content="<p>Dell1</p>">
+            <!-- 插槽 -->
+            <p>Dell2</p>
+        </child>
+
+        <hr /> 
+
+        <body-content>
+            <!-- slot: 插槽名字 -->
+            <div class="header" slot="header">header</div>
+            <div class="foooter" slot="footer">footer</div>
+        </body-content>
+        
+        <body-content></body-content>
+    </div>
+
+    <!-- 
+        插槽的使用场景
+            1. 使用参数向子组件传递html时,不能直接使用，必须用 div 包裹（v-html="参数名" 形式展示出内容）
+
+        具名插槽
+            <slot name="插槽名字">默认内容</slot>
+            插槽只可以有一个，ju名插槽可以有多个
+     -->
+
+    <script>
+
+        Vue.component('body-content', {
+            template:  `<div>
+                            <slot name="header"></slot>
+                            <div class='content'>content</div>
+                            <slot name="footer"></slot>
+                        </div>`,
+        })
+
+        Vue.component('child', {
+            props: ['content'],
+            data: function(){
+                return {
+                    msg: 'hello',
+                }
+            },
+            /* content 会被转义成字符串
+            template: '<div>{{content}}</div>', */
+            template:  `<div>
+                            <p>msg</p>
+                            <div v-html="this.content"></div>
+                            <slot>默认内容</slot>
+                        </div>`,
+        })
+        var vm = new Vue({
+            el: '#root',
+        });
+    </script>
+</body>
+</html>

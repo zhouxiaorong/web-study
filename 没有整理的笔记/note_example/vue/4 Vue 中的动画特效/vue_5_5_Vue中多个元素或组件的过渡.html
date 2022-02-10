@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中多个元素或组件的过渡</title>
+    <script src="/common/js/vue.js"></script>
+    <style>
+        .v-enter, .v-leave-to {opacity: 0;}
+        .v-enter-active, .v-leave-active {transition: opacity 3s;}
+    </style>
+</head>
+<body>
+    <div id="root">
+        <button @click="handleClick">toggle</button>
+
+        <!-- 多个元素的过渡动画 start -->
+        <transition mode="out-in">
+            <div v-if="show" key="one">Hello World</div>
+            <div v-else key="two">bye World</div>
+        </transition>
+        <!-- 多个元素的过渡动画 end -->
+        
+        <!-- 多个组件的过渡动画 start -->
+        <transition mode="in-out">
+            <child v-if="show" key="child"></child>
+            <child-one v-else key="child-one"></child-one>
+        </transition>
+        <!-- 多个组件的过渡动画 end -->
+        <!-- 多个元素的过渡动画 end -->
+        
+        <!-- 动态组件的过渡动画 start -->
+        <transition mode="out-in">
+            <component :is="type"></component>
+        </transition>
+        <!-- 动态组件的过渡动画 end -->
+    </div>
+
+    <!-- 
+        vue 在多个元素切换时，会利用 dom，导致动画效果不会出现
+            => 添加 key
+
+        多个元素的过渡动画
+            mode=""
+                in-out
+                    先进入再隐藏
+                out-in
+                    先隐藏再进行
+        
+        多个组件的过渡动画
+     -->
+
+    <script>
+        Vue.component('child', {
+            template: '<div>child</div>'
+        })
+        Vue.component('child-one', {
+            template: '<div>child-one</div>'
+        })
+        
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                show: true,
+                type: 'child'
+            },
+            methods: {
+                handleClick: function(){
+                    this.show = !this.show;
+                    this.type = this.type === 'child' ? 'child-one' : 'child';
+                },
+                handleClick2: function(){
+                },
+            }
+        })
+    </script>
+</body>
+</html>

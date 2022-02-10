@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的Set方法</title>
+    <script src="/common/js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <ul>
+            <li v-for="(val, key, index) in objects">
+                {{index}} --- {{key}} --- {{val}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="arr in arrs">
+                {{arr}}
+            </li>
+        </ul>
+    </div>
+
+    <!-- 
+        Vue中的set方法
+            
+            改变对象
+                Vue.set(vm.objects, key, newValue);
+                vm.$set(vm.objects, key, newValue);
+            改变数组
+                Vue.set(vm.arrays, index, newValue);
+                vm.$set(vm.arrays, index, newValue);
+     -->
+
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                objects: {
+                    title: 'How to do lists in Vue',
+                    author: 'Jane Doe',
+                    publishedAt: '2016-04-10'
+                },
+                arrs: [1,2,3,4]
+            },
+        });
+
+        setTimeout(function(){
+            //增加数据 - 方法1
+            Vue.set(vm.objects, 'name', 'zxr');
+            //增加数据 - 方法2
+            vm.$set(vm.objects, 'age', 18);
+            // 改变数组内容，第二个参数为下标，第三个参数为新的内容
+            Vue.set(vm.arrs, 1, 5);
+            vm.$set(vm.arrs, 2, 8);
+        }, 3000);
+    </script>
+</body>
+</html>

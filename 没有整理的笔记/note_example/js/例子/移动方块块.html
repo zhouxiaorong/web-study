@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>移动方块块</title>
+    <style>
+    * {padding: 0px;margin: 0px;}
+    div.region {width:500px;height:500px;border: 1px dashed #ddd;margin: auto;position: relative;}
+    p {width: 100px;height: 100px;background-color: skyblue;position: absolute;top: 0;left: 0;}
+    </style>
+</head>
+
+<body>
+    <div class="region">
+        <p></p>
+    </div>
+
+    <script>
+
+        //得到元素
+        var body = document.getElementsByTagName('body')[0];
+        var region = document.getElementsByClassName('region')[0];
+        var cube = document.getElementsByTagName('p')[0];
+
+        //JS技巧 - 监听里面放监听
+        //当oDiv触发了 onmousedown 事件后，才触发 onmousemove 事件
+        cube.onmousedown = function (event) {
+            // e = e || event;
+            //鼠标按下去的时候，就要记录鼠标在盒子中的位置，这个位置实际上就是误差
+            var deltaX = event.clientX - cube.offsetLeft;
+            var deltaY = event.clientY - cube.offsetTop;
+            //整个文档添加mousemove事件，鼠标移动的时候触发
+            document.onmousemove = function (event) {
+                //减去误差，div跟随鼠标移动
+                // cube.style.left = event.clientX - deltaX + 'px';
+                // cube.style.top = event.clientY - deltaY + 'px';
+                cube.style.left = Math.min(region.scrollWidth - cube.offsetWidth, Math.max(0, (event.clientX - deltaX))) + 'px';
+                cube.style.top = Math.min(region.scrollHeight - cube.offsetHeight, Math.max(0, (event.clientY - deltaY))) + 'px';
+            }
+        }
+
+        // 鼠标抬起
+        body.onmouseup = function () {
+            //document身上的监听，设置为null，删除了监听
+            document.onmousemove = null;
+        }
+    </script>
+</body>
+
+</html>

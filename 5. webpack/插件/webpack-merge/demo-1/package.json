@@ -1,0 +1,17 @@
+{
+  "name": "demo-1",
+  "version": "1.0.0",
+  "description": "- 功能\r     - 允许连接数组并合并对象，而不是覆盖组合",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-merge": "^4.2.2"
+  }
+}

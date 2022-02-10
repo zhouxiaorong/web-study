@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="but1" type="button" onclick="func1()" value="func1" />
+  <input id="but2" type="button" onclick="func2()" value="func2" />
+  <input id="but3" type="button" onclick="func3()" value="func3" />
+  <script>
+    var arr = [];
+    (function(){
+      for(var i = 0; i < 100000000; i++){
+        arr[i] = i;
+      }
+    })();
+    function func1(){
+      var start = new Date().getTime();
+      var total = arr.reduce(function(pre, curr){
+        return pre + curr;
+      }, 0);
+      var end = new Date().getTime();
+      console.log('fun1: '+ (end-start) + '毫秒，');
+    }
+    function func2(){
+      var start = new Date().getTime();
+      var total = 0;
+      for(var i = 0; i < arr.length; i++){
+        total += arr[i];
+      }
+      var end = new Date().getTime();
+      console.log('fun2: '+ (end-start) + '毫秒，');
+    }
+    function func3(){
+      var start = new Date().getTime();
+      var total = 0;
+      for(var i = 0, len = arr.length; i < len; i++){
+        total += arr[i];
+      }
+      var end = new Date().getTime();
+      console.log('fun2: '+ (end-start) + '毫秒，');
+    }
+    function arr1(){
+      var start = new Date().getTime();
+      var total = 0;
+      for(var i = 0, len = arr.length; i < len; i++){
+        total += arr[i];
+      }
+      var end = new Date().getTime();
+      console.log('fun2: '+ (end-start) + '毫秒，');
+      // <li login="1" aid="'+ (odata.id || '') +'"><div class="licon">'+ (odata.name || '') +'</div></li>
+    }
+  </script>
+</body>
+</html>

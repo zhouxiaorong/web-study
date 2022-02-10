@@ -1,0 +1,1 @@
+document.write('<p>demo13 index js</p>')

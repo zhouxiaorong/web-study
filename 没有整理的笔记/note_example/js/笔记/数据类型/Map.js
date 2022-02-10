@@ -1,0 +1,16 @@
+
+// size: (...)
+// constructor: ƒ Map()
+// get: ƒ ()
+// set: ƒ ()
+// has: ƒ has()
+// delete: ƒ delete()
+// clear: ƒ clear()
+// entries: ƒ entries()
+// forEach: ƒ forEach()
+// keys: ƒ keys()
+// values: ƒ values()
+// toJSON: ƒ toJSON()
+// Symbol(Symbol.toStringTag): "Map"
+// Symbol(Symbol.iterator): ƒ entries()
+// get size: ƒ size()

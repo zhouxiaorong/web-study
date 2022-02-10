@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的样式绑定</title>
+    <script src="/common/js/vue.js"></script>
+    <style>
+        .activated, .activated2 {color:red;}
+        .fontSize30 {font-size: 30px;}
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- 方法一 -->
+        <!-- :class - class对象绑定，DIV 元素上要有一个名为 activated 的 class，显示不显示取决于isActivated -->
+        <div @click="handleDivClick"
+             :class="{activated: isActivated, fontSize30: true}" 
+        >
+            {{hello}}
+        </div>
+        
+        <!-- 方法二 -->
+        <!-- 页面上会显示一个class，显示内容为变量activated里的内容 -->
+        <div @click="handleDivClick2"
+             :class="[activated2, fontSize30]" 
+        >
+            {{hello}}
+        </div>
+
+        <!-- 方法三 -->
+        <div :style="styleObj" @click="handleDivClick3">
+            {{hello}}
+        </div>
+
+        <!-- 方法四 -->
+        <div :style="[styleObj2, {color: 'yellow'}]" @click="handleDivClick4">
+            {{hello}}
+        </div>
+    </div>
+
+    <!-- 
+        :class 
+            动态向dom元素添加/删除不同class，
+            1. :class="{classname: isShow}" 
+                class 可以和对象绑定，key为class名称，value代表是否展示(true/false)
+            2. :class="[activated2]" 
+                class 可以和数组绑定，数组变量内容为 class 名称，
+        :style
+            动态向dom元素添加/删除内联样式
+            1. :style="styleObj"
+                style 可以和对象绑定，key为样式名称，value为样式内容
+            2. :style=""
+     -->
+
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                hello: "hello world",
+                isActivated: false,
+                activated2: "",
+                fontSize30: "fontSize30",
+                styleObj: {
+                    color: 'blue',
+                    fontWeight: '800',
+                    fontSize: '30px'
+                },
+                styleObj2: {
+                    color: 'blue',
+                    fontWeight: '800',
+                    fontSize: '30px'
+                }
+            },
+            methods: {
+                handleDivClick: function(){
+                    // 值取反，用于点击循环显示/隐藏
+                    this.isActivated = !this.isActivated;
+                },
+                handleDivClick2: function(){
+                    this.activated2 = this.activated2 === 'activated2' ? '' : 'activated2';
+                },
+                handleDivClick3: function(){
+                    this.styleObj.color = this.styleObj.color === 'blue' ? 'green' : 'blue';
+                },
+                handleDivClick4: function(){
+                    this.styleObj2.color = this.styleObj2.color === 'blue' ? 'green' : 'blue';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

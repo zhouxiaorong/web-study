@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0px;
+      margin: 0px;
+    }
+    .box, ul {
+      width: 200px;
+      height: 200px;
+    }
+    .box {
+      margin: 100px auto;
+    }
+    ul {
+      transform-style: preserve-3d;
+      perspective: 10000px;
+      position: relative;
+      /* animation: trans 5s ease 0s infinite; */
+    }
+    @keyframes trans {
+      from {transform: rotateX(0deg) rotateY(0deg);}
+      to {transform: rotateX(360deg) rotateY(360deg);}
+    }
+    li {
+      list-style: none;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      border-bottom: 200px solid ;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+    }
+    .li1 {border-bottom-color: rgba(255, 0, 0, .4);transform-origin: top;transform: translateZ(100px) rotateX(60deg);}
+    .li2 {border-bottom-color: rgba(0, 255, 0, .4);transform-origin: top;transform: translateZ(100px) rotateX(60deg)}
+    .li3 {border-bottom-color: rgba(0, 0, 255, .4);transform-origin: top;transform: translateZ(100px) rotateX(60deg)}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <ul>
+      <li class="li1"></li>
+      <li class="li2"></li>
+      <li class="li3"></li>
+      <!-- <li class="li3"></li>
+      <li class="li4"></li> -->
+    </ul>
+  </div>
+</body>
+</html>

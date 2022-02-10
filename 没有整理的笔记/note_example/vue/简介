@@ -1,0 +1,28 @@
+
+
+vue项目结构 {
+    ├── build                       # 项目构建（webpack）相关代码
+    ├── config                      # 配置目录，包括端口号等
+    ├── node_module                 # npm加载的项目依赖的模块
+    ├── src                         # 源代码
+    ├── static                      # 初始测试目录（可删除）
+    ├── .XXX 文件                   # 一些配置文件，包括语法配置，git配置等
+    ├── index.html                  # 项目的运行入口（首页入口文件，可以添加一些 meta 信息或统计代码）
+    ├── package.json                # 包的依赖管理文件（项目的配置文件，使用npm生成项目时，所输入的配置信息，包括项目名称，作者等）
+    ├── README.md                   #项目的说明文档，Markdown格式
+}
+
+package.json 属性说明 {
+    name - 包名.
+    version - 包的版本号。
+    description - 包的描述。
+    homepage - 包的官网URL。
+    author - 包的作者，它的值是你在https://npmjs.org网站的有效账户名，遵循“账户名<邮件>”的规则，例如：zhangsan <zhangsan@163.com>。
+    contributors - 包的其他贡献者。
+    dependencies / devDependencies - 生产/开发环境依赖包列表。它们将会被安装在 node_module 目录下。
+    repository - 包代码的Repo信息，包括type和URL，type可以是git或svn，URL则是包的Repo地址。
+    main - main 字段指定了程序的主入口文件，require('moduleName') 就会加载这个文件。这个字段的默认值是模块根目录下面的 index.js。
+    keywords - 关键字
+
+       上述参数是极为常见的参数，另外还可以设置script、license等等。除了官方必须的一些参数外，我们也可以存储我们自己的关于模块的描述信息在package.json。
+}

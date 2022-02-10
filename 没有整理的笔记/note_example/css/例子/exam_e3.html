@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>形状</title>
+    <script src="../../base/js/jquery-1.8.0.min.js"></script>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        .square {
+            height: 1em;
+            width: 1em;
+            display: inline-block;
+            position: relative;
+        }
+
+        .square::before,
+        .square::after {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+        .c-moeule {padding:10px 50px;}
+        .c-moeule h2 {position: relative;left: -50px;}
+        .c-moeule h3 {position: relative;left: -25px;}
+        .shape .square {font-size: 50px;margin:10px;}
+
+        .shape .shape-solid-1 {background: #d5be21;border-radius: 50% 50% 50% 0%;transform: rotate(-45deg);}
+        .shape .shape-solid-2 {background: #d5be21;border-radius: 50% / 100% 100% 0 0;}
+        .shape .shape-solid-3 {background: #d5be21;border-radius: 50% / 0 0 100% 100%;}
+        .shape .shape-solid-4 {background: #d5be21;border-radius: 100% 0 0 100% / 50%;}
+        .shape .shape-solid-5 {background: #d5be21;border-radius: 0 100% 100% 0 / 50%;}
+        .shape .shape-solid-6 {background: #d5be21;border-radius: 100% 0 0 0;}
+        .shape .shape-solid-7 {background: #d5be21;transform: skewX(-20deg);}
+        .shape .shape-solid-8 {background: linear-gradient(225deg, transparent .2em, #d5be21 0);}
+        .shape .shape-solid-9 {background: #d5be21;border-radius: 80% 20% 5% 20%;transform: rotate(135deg);}
+
+        .shape .shape-other-1 {border:.2em solid;border-color: #d5be21 #bed521 #f0b8ad #56bae1;}
+
+        .texture .square {font-size: 80px;margin:10px;}
+        .texture .texture-1 {background: linear-gradient(to top,#f0b8ad 50%, #56bae1 50%);background-size: 100% .25em;}
+        .texture .texture-2 {background: linear-gradient(to right,#f0b8ad 50%, #56bae1 50%);background-size: .25em 100%;}
+        .texture .texture-3 {background: linear-gradient(45deg,#f0b8ad 50%, #56bae1 50%);background-size: 50% 50%;}
+        .texture .texture-4 {background: linear-gradient(135deg,#f0b8ad 50%, #56bae1 50%);background-size: 50% 50%;}
+
+        .texture .texture-5 {background: linear-gradient(45deg,#f0b8ad 20%, #56bae1 0, #56bae1 25%, #f0b8ad 0, #f0b8ad 45%, #56bae1 0, #56bae1 50%, #f0b8ad 0, #f0b8ad 70% ,#56bae1 0, #56bae1 75%, #f0b8ad 0, #f0b8ad 95%, #56bae1 0);background-size: 1em 1em;}
+        .texture .texture-5 {background: linear-gradient(45deg,#f0b8ad 40%, #56bae1 0, #56bae1 50%, #f0b8ad 0,#f0b8ad 90%, #56bae1 0);background-size: 0.5em 0.5em;}
+        .texture .texture-6 {background: linear-gradient(45deg,#f0b8ad 45%, #56bae1 0, #56bae1 55%, #f0b8ad 0);background-size: .3em .3em;}
+        .texture .texture-7 {background: linear-gradient(45deg,#f0b8ad 25%, #56bae1 0, #56bae1 50%, #f0b8ad 0, #f0b8ad 75%, #56bae1 0);background-size: .5em .5em;}
+        .texture .texture-8 {background: linear-gradient(135deg,#f0b8ad 25%, #56bae1 0, #56bae1 50%, #f0b8ad 0, #f0b8ad 75%, #56bae1 0);background-size: .5em .5em;}
+        .texture .texture-9 {background: repeating-linear-gradient(45deg, #f0b8ad, #f0b8ad .15em, #56bae1 0, #56bae1 0.3em);}
+        /* .texture .texture-9 {background: repeating-linear-gradient(45deg, #fb3, #fb3 .15em, #58a 0, #58a 0.3em);} */
+    </style> 
+</head>
+
+<body>
+    <div class="container">
+        <div class="c-moeule shape">
+            <h2>形状</h2>
+            <div class="square shape-solid-1"></div>
+            <div class="square shape-solid-2"></div>
+            <!-- <div class="square shape-solid-3"></div> -->
+            <div class="square shape-solid-4"></div>
+            <!-- <div class="square shape-solid-5"></div> -->
+            <div class="square shape-solid-6"></div>
+            <div class="square shape-solid-7"></div>
+            <div class="square shape-solid-8"></div>
+            <div class="square shape-solid-9"></div>
+
+            <div class="square shape-other-1"></div>
+            <div class="square shape-other-2"></div>
+        </div>
+        <div class="c-moeule">
+            <h2>图标</h2>
+
+        </div>
+        <div class="c-moeule texture">
+            <h2>纹理</h2>
+            <h3>样例</h3>
+            <div class="square texture-1"></div>
+            <div class="square texture-3"></div>
+            <div class="square texture-5"></div>
+            <div class="square texture-9"></div>
+
+            
+            <br/>
+            <h3>扩展</h3>
+            <div class="square texture-2"></div>
+            <div class="square texture-4"></div>
+            <div class="square texture-6"></div>
+            <div class="square texture-7"></div>
+            <div class="square texture-8"></div>
+        </div>
+        <div class="c-moeule">
+            <h2>动物</h2>
+
+        </div>
+        <div class="c-moeule">
+            <h2>植物</h2>
+
+        </div>
+    </div>
+</body>
+
+</html>
