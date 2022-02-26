@@ -1,6 +1,6 @@
 //引入mockjs
 import Mock from 'mockjs'
-
+  
 //使用mockjs模拟数据
 const url = 'http://127.0.0.1:5500/html/node_000000.html';
 Mock.mock(url, {
