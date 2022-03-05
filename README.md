@@ -94,3 +94,7 @@
 # 项目
   - [基于浏览器环境的数据采集sdk: Webpack4+Babel7+ES6兼容IE8的方案](https://github.com/drafish/dc-sdk-js)
 
+
+# 2022
+  - [尚硅谷 2022年度全网最全Web前端学习路线](https://www.bilibili.com/read/cv5650633)
+  - [尚硅谷 2022年web前端开发学习路线图](https://www.bilibili.com/read/cv10431130)
