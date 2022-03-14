@@ -1,12 +1,12 @@
 # vue 实例方法
 
-## Vue.set(),vm.$set()
+## vm.$set
   - 语法
     ```js
       vm.$set(target, propertyName/index, value)
       Vue.set(target, key, value)
     ```
-  - 参数：r
+  - 参数：
   - 说明
     - target: {Object | Array}，目标对象 
     - propertyName/index: {string | number}，对象key值或数组下标 
