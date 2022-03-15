@@ -1,6 +1,6 @@
 # 选项
 ## el
-  > 用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串
+  > 挂载点；用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串
   - 语法
     ```js
       new Vue({
@@ -8,6 +8,7 @@
       })
     ```
   - 说明
+    - 定义标签（要接管的 dom），实例属性
     - 也可以先创建Vue实例，之后再通过`vm.$mount('#root')`指定el的值
     ```html
       <div id="root">{{ name }}</div>
@@ -33,6 +34,7 @@
 ## data
   > 用于存储数据，数据供el所指定的容器去使用，
   - 语法
+    - 数据，实例属性
     - 对象式：data 的第一种写法
       ```js
         new Vue({
@@ -56,6 +58,11 @@
     - 定义组件时，data必须写成函数式 →→→ 会报错；也需要避免组件被复用时，数据存在引用关系（一个改变，都改变了）
     - data中所有的属性，最后都出现在了vm身上
     - vm身上所有的属性 及 Vue原型上所有属性，在Vue模板中都可以直接使用。
+    - 当一个 Vue 实例被创建时，它将 data 对象中的所有的 property 加入到 Vue 的响应式系统中。当这些 property 的值发生改变时，视图将会产生“响应”，即匹配更新为新的值。当这些数据改变时，视图会进行重渲染
+  - 注意事项
+    - 一开始为空或不存在的属性，不会触发任何视图的更新
+    - 只有当实例被创建时就已经存在于 data 中的 property 才是响应式的（对实例创建后新添加的 propert  的改动不会触发任何视图的更新）
+    - 使用 `Object.freeze(vm)` 会阻止修改现有的 *property* ，响应系统无法再追踪 Vue 实例 vm 的变化
   - 数据代理
     - 通过vm对象来代理data对象中属性的操作（读/写）
     - 好处: 更加方便的操作data中的数据
@@ -65,7 +72,7 @@
       3. 在getter/setter内部去操作（读/写）data中对应的属性。
   - 例
     - 数组，直接赋值时不会监听，dom中值不会更改
-      ```js
+	    ```js
 			const vm = new Vue({
 				el:'#root',
 				data:{
@@ -85,14 +92,29 @@
 						this.persons.splice(0,1,{id:'001',name:'王五',age:50,sex:'男'})//奏效
 					}
 				}
-			}) 
+  		}) 
       ```
 
 ## methods
+  - 语法
+    ```js
+    new Vue({
+      methods:{
+        方法名(){
+          // ...
+        }
+      }
+    })
+    ```
+  - 说明 
+    - 自定义方法，实例方法
   - 注意事项
     - methods中配置的函数，不要用箭头函数！否则this就不是vm了；
-    - methods中配置的函数，都是被Vue所管理的函数，this的指向是vm 或 组件实例对象；
-
+    - methods中配置的函数，都是被Vue所管理的函数
+    - 没有缓存机制，***每次都重新计算渲染***
+  - this
+    - 默认指向vue实例对象或组件实例对象；
+    - 为箭头函数时，指向window
 
 ## computed
   - 语法
@@ -121,7 +143,9 @@
     - 原理：底层借助了 *Objcet.defineproperty* 方法提供的*getter*和*setter*。
     - get函数会在**初次读取时**和**所依赖的数据改变时**调用执行
     - 如果计算属性要被修改，那必须写set函数去响应修改，且set中要引起计算时依赖的数据发生改变。
-  - 与*methods*相比优势
+  - 注意事项
+    - 内置缓存，如果 ***依赖的值没有发生改变*** ，就 ***不会重新计算***
+  - 与*methods*相比优势 
     - 内部有缓存机制（复用），效率更高，调试方便。
   - 例
     ```html
@@ -156,8 +180,9 @@
       </script>
     ```
 
-## watch,$watch
+## watch
   - 语法
+    - `watch: { [key: string]: string | Function | Object | Array }`
     - 第一种写法: 
       ```js
         var vm = new Vue({
@@ -189,26 +214,34 @@
           console.log('xx被修改了',newValue,oldValue,this)
         }) 
       ```
+  
   - 参数
     - *immediate*: true: 初始化时handler会被调用 false: 默认，不会被调用
     - *deep*: true: 监听对象内部值的变化 false: 默认，不监听
+
   - 深度监视：
     1. Vue中的watch默认不监测对象内部值的改变（一层）。
     2. 配置deep:true可以监测对象内部值改变（多层）。
+
   - 功能说明
     - 当被监视的属性变化时, 回调函数自动调用, 进行相关操作
     - 监视的属性必须存在，才能进行监视！！
+
   - 注意事项
+    - 有缓存，和 ***不相关*** 的内容改变时，页面 ***不会重新渲染***
     - Vue自身可以监测对象内部值的改变，但Vue提供的watch默认不可以！
     - 使用watch时根据数据的具体结构，决定是否采用深度监视。
+    - 不能使用箭头函数来定义 watch 函数
+      > 箭头函数绑定了父级作用域的上下文，所以 this 将不会按照期望指向 Vue 实例，this.updateAutocomplete 将是 undefined。
+
   - **computed** 和 **watch** 之间的区别
     1. computed能完成的功能，watch都可以完成。
     2. watch能完成的功能，computed不一定能完成
     3. watch可以进行异步操作；computed不可以
-    4. 
-    5. 
+    
 
 
+    
 ## filters
   > 过滤器
   - 语法
@@ -243,6 +276,7 @@
 			<h3>现在是：{{time | timeFormater}}</h3>
 			<!-- 过滤器（传参） -->
 			<h3>现在是：{{time | timeFormater('YYYY_MM_DD') | mySlice}}</h3>
+		```
 
       <script>
             
@@ -286,13 +320,16 @@
 
 ## directives
   > 自定义指令
+  
   - [自定义指令](#自定义指令)
 
 ## components
   > 局部注册组件
-  - [组件](#组件)
+  
+  - [组件](vue-6-组件.md)
 
 ## props
   > 用于接收来自父组件的数据
-  - [组件间通信，父传子](vue_组件通信.md#父传子：props)
+  
+  - [组件间通信，父传子](vue-10-组件通信.md#父传子：props)
 

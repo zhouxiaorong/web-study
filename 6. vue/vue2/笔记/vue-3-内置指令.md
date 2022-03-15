@@ -1,8 +1,7 @@
 # vue 内置指令
 
 
-
-## v-bind:
+## v-bind
 
 > 单向绑定解析表达式，可简写为 :xxx
 
@@ -28,9 +27,9 @@
       </script>
     ```
 
-## v-model:
+## v-model
 
-  > 双向数据绑定
+  > 双向数据绑定（一个变化另一个也会变化）
 
   - 语法
     - `v-model:xxx="解析表达式"`
@@ -106,7 +105,7 @@
         </script>
       ```
 
-## v-on：
+## v-on
 
 > 绑定事件监听, 可简写为@
 
@@ -196,23 +195,38 @@
           </script>
         ```
 
-## v-for：
+## v-for
 
 > 遍历数组/对象/字符串
 
-  - 遍历数组/对象/字符串
-  
   - 语法
     - `v-for="item in xxx" `
+    - `v-for="item of xxx"`
     - `v-for="(item, index) in xxx" ` 
+    - `v-for="(item, index) of items"`
+    - `v-for="(value, name, index) in object"`
+
+  - 参数
+    - item: 循环过程中每一项的内容, 被迭代的数组元素的别名
+    - index: 下标
+    - name: 对象的键名
+    - 可以用 of 替代 in 作为分隔符，因为它更接近 JavaScript 迭代器的语法
   - 说明
-    - 用于展示列表数据
+    - 用于展示列表数据，基于一个数组来渲染一个列表
     - 可遍历：数组、对象、字符串（用的很少）、指定次数（用的很少）
+    - 可以用 v-for 来遍历一个对象的属性（在遍历对象时，会按 Object.keys() 的结果遍历，但是不能保证它的结果在不同的 JavaScript 引擎下都一致。）
+    - 可以访问所有父作用域的属性
   - 注意事项
-    - 使用*v-for*遍历时,必须给每个结构都打个唯一标识<span style="color:red">:key="yyy"</span>(在父级下的子孙级中,保证key值唯一)
-    - 使用*v-for*时，如果不用 *:key* ,<span style="color:blue">默认key值为idnex值</span>
-    - 最好不要用index值，使用input等输入框时会出错
+    - 为了提升循环的性能，会给每个结构都打个唯一标识<span style="color:red">:key="yyy"</span>
+    - :key 默认 index 值；不推荐用 index 比较费性能
+    - 如果不用 *:key* ,<span style="color:blue">默认key值为idnex值</span>
+    - 不推荐用 index；比较费性能；而且使用input等输入框时会错乱
   - 例
+    - 遍历数值
+      ```html
+      <!-- v-for 也可以接受整数。在这种情况下，它会把模板重复对应次数 -->
+      <span v-for="n in 10">{{ n }} </span>
+      ```
     - 遍历数组
       ```html
         <ul>
@@ -295,38 +309,47 @@
   - 语法
     - `:key="yyy"`
   - 说明
-    - 给节点一个唯一标识，相当于人类社会中的身份证号
     - key是vue内部在用的  
-    - 如果不写key，key值默认为'index' 
-  1. 虚拟DOM中key的作用：
+    - 给节点一个唯一标识，相当于人类社会中的身份证号
+    - `v-for`循环时，如果不写key，key值默认为'index' 
+    - 可以用于强制替换元素/组件，而不是重复使用它
+  
+  - 注意事项
+    - key 值要唯一
+    - 不推荐用index，比较费性能，不能让vue充分的复用dom节点
+    - 不要使用对象或数组之类的非基本类型值作为 v-for 的 key。请用字符串或数值类型的值
+    - 有相同父元素的子元素必须有独特的 key。重复的 key 会造成渲染错误
 
-    > key是虚拟DOM对象的标识，当数据发生变化时，Vue会根据【新数据】生成【新的虚拟DOM】, 
-    >随后Vue进行【新虚拟DOM】与【旧虚拟DOM】的差异比较，比较规则如下：
+  - 其他
+    1. 虚拟DOM中key的作用：
 
-  2. 对比规则：
-        1. 旧虚拟DOM中找到了与新虚拟DOM相同的key：
-        ①.若虚拟DOM中内容没变, 直接使用之前的真实DOM！
-        ②.若虚拟DOM中内容变了, 则生成新的真实DOM，随后替换掉页面中之前的真实DOM。
+      > key是虚拟DOM对象的标识，当数据发生变化时，Vue会根据【新数据】生成【新的虚拟DOM】, 
+      >随后Vue进行【新虚拟DOM】与【旧虚拟DOM】的差异比较，比较规则如下：
 
-          2. 旧虚拟DOM中未找到与新虚拟DOM相同的key:
+    2. 对比规则：
+          1. 旧虚拟DOM中找到了与新虚拟DOM相同的key：
+          ①.若虚拟DOM中内容没变, 直接使用之前的真实DOM！
+          ②.若虚拟DOM中内容变了, 则生成新的真实DOM，随后替换掉页面中之前的真实DOM。
+
+            2. 旧虚拟DOM中未找到与新虚拟DOM相同的key:
+          
+          
+        创建新的真实DOM，随后渲染到到页面。
         
+    3. 用index作为key可能会引发的问题：
+          1. 若对数据进行逆序添加、逆序删除等破坏顺序操作:
+            会产生没有必要的真实DOM更新 ==> 界面效果没问题, 但效率低。
+
+              2. 如果结构中还包含输入类的DOM：
+            
+            会产生错误DOM更新 ==> 界面有问题。
         
-      创建新的真实DOM，随后渲染到到页面。
-      
-  3. 用index作为key可能会引发的问题：
-        1. 若对数据进行逆序添加、逆序删除等破坏顺序操作:
-           会产生没有必要的真实DOM更新 ==> 界面效果没问题, 但效率低。
+    4. 开发中如何选择key?:
+          1. 最好使用每条数据的唯一标识作为key, 比如id、手机号、身份证号、学号等唯一值。
+              2. 如果不存在对数据的逆序添加、逆序删除等破坏顺序操作，仅用于渲染列表用于展示，
+              使用index作为key是没有问题的。
 
-            2. 如果结构中还包含输入类的DOM：
-           
-           会产生错误DOM更新 ==> 界面有问题。
-      
-  4. 开发中如何选择key?:
-        1. 最好使用每条数据的唯一标识作为key, 比如id、手机号、身份证号、学号等唯一值。
-            2. 如果不存在对数据的逆序添加、逆序删除等破坏顺序操作，仅用于渲染列表用于展示，
-            使用index作为key是没有问题的。
-
-## v-if,v-else-if,v-else：
+## v-if,v-else-if,v-else
   > 条件渲染（动态控制节点是否存存在）
   - 语法
     ```js
@@ -343,6 +366,24 @@
       <!----------- ->
     ```
     - v-if可以和v-else-if\v-else一起使用,但要求结构不能被打断
+  - 注意事项
+    - 不推荐同时使用 v-if 和 v-for，当 v-if 与 v-for 一起使用时，v-for 具有比 v-if 更高的优先级
+    - v-else-if、v-else必须 **紧跟** 在带v-if或者v-else-if的元素 **之后** ，结构不能被打断，否则将不会被识别
+  - 复用元素
+    - Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染
+    - 当input标签key值相同时，会被复用，不会清除复用的input标签用户已经输入的内容
+      ```html
+      <!-- input 标签不复用（添加 key） -->
+      <div v-if="loginType === 'username'">
+          <label>Username</label>
+          <input placeholder="Enter your username" key="ua-input">
+      </div>
+      <div v-else>
+          <label>Email</label>
+          <input placeholder="Enter your email address" key="ua-input">
+      </div>
+      ```
+
   - 例
     - 用一组时,前端达成条件了,不会判断后面了
       ```js
@@ -380,18 +421,32 @@
         <p>3</p>
       ```
 
-## v-show：
+
+## v-show
   > 条件渲染 (动态控制节点是否展示)
   - 语法
-    - v-show="表达式"
+    ```html
+    <div v-show="表达式"></div>
+    ```
   - 说明
     - 适用于切换频率较低的场景
-    - 不展示的DOM元素未被移除,仅仅是使用样式隐藏掉
+    - v-show 只是简单地切换元素的 CSS 属性 display
+    - v-show 不支持 <template> 元素，也不支持 v-else
+    - 带有 v-show 的元素始终会被渲染并保留在 DOM 中（不展示的DOM元素未被移除,仅仅是使用样式隐藏掉）
       ```js
         <div v-show="false"></div>
             ↓
         <div style="display:none"></div>
       ```
+  - v-show 与 v-if 比较
+    - 相同点
+      - 都能够控制一个模板标签是否在页面上展示
+    - 不同点
+      - js表达式结果换为 false时，v-if会从页面上直接移除，而 v-show 则会以 display:none 方式隐藏
+    - 说明
+      - 一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换
+      - 而使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+
   - 例
     - 使用表达式
       ```js
@@ -536,3 +591,26 @@
     ```
 
 
+
+## template
+  > 模板占位符；可以包裹一些元素，但并不会真正渲染到页面上
+  
+  - 在 <template> 上使用 v-for：多个dom元素
+    ```html
+    <ul>
+      <template v-for="item in items">
+          <li>{{ item.msg }}</li>
+          <li class="divider" role="presentation"></li>
+      </template>
+    </ul>
+
+    <!-- 渲染为： -->
+    <ul>
+      <li>{{ item.msg }}</li>
+      <li>{{ item.msg }}</li>
+      <!-- ... -->
+    </ul>
+    ```
+
+
+  

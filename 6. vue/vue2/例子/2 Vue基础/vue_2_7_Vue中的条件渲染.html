@@ -52,7 +52,7 @@
         v-else-if
             说明
                 1. 当 v-if 中的js表达式结果为 false 时，再计算 v-else-if 中的表达式，当结果为 true 时，展示该标签内容
-                2. 类似于 v-else，v-else-if 也必须紧跟在带 v-if 或者 v-else-if 的元素之后带有 v-show 的元素始终会被渲染并保留在 DOM 中。
+                2. 类似于 v-else，v-else-if 也必须紧跟在带 v-if 或者 v-else-if 的元素之后。
         
         v-else
             说明 
@@ -74,7 +74,7 @@
                 1. 通过v-if指令结合js表达式的返回值（true/false），决定一个标签是否在页面上展示（存在）
                 2. v-show 只是简单地切换元素的 CSS 属性 display
                 3. v-show 不支持 <template> 元素，也不支持 v-else
-
+带有 v-show 的元素始终会被渲染并保留在 DOM 中
         v-show 与 v-if 比较
             相同点：都能够控制一个模板标签是否在页面上展示
             不同点：
