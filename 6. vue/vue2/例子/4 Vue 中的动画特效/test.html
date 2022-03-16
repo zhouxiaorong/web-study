@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中CSS动画原理</title>
+    <script src="../../vue.js"></script>
+    <style>
+      .abc-eactive {
+        animation: bounce-in 2s;
+      }
+      .abc-lactive {
+        animation: bounce-in 2s reverse;
+      }
+      .custom-appear-class {
+        color: red;
+      }
+      .custom-appear-to-class {
+        color: blue;
+      }
+      .custom-appear-active-class {
+        color: green;
+      }
+      @keyframes bounce-in {
+        0% {
+          transform: scale(0);
+        }
+        50% {
+          transform: scale(1.5);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    </style>
+</head>
+<body>
+    <div id="root">
+      <div id="example-2">
+        <button @click="show = !show">Toggle show</button>
+        <transition 
+          :duration="1000"
+          enter-active-class ="abc-eactive" 
+          leave-active-class="abc-lactive" 
+        >
+        <!-- 
+        -->
+          <p v-if="show">11111</p>
+        </transition>
+        <transition 
+                enter-active-class ="abc-eactive" 
+                leave-active-class="abc-lactive" 
+        >
+        <!-- 
+        -->
+          <p v-if="show">22222</p>
+        </transition>
+        <transition 
+                :duration="3000"
+                enter-active-class ="abc-eactive" 
+                leave-active-class="abc-lactive" 
+        >
+        <!-- 
+        -->
+          <p v-if="show">33333</p>
+        </transition>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: '#example-2',
+        data: {
+          show: true
+        }
+      })
+    </script>
+</body>
+</html>
