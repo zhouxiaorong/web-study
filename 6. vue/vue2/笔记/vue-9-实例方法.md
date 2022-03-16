@@ -69,14 +69,50 @@
     - 销毁后，双向绑定功能不存在，不过之前绑定的事件还遗留着并没有销毁完全
 
 ## $nextTick
-  > 在视图重新渲染之后调用运行回调函数代码
+  > 在下一次 DOM 更新结束后执行其指定的回调  
+  > 在修改数据之后立即使用它，然后等待 DOM 更新
 
   - 语法
     ```js
-    this.$nextTick(function () {
-      // 这个回调将在视图重新渲染后调用
+    // 这个回调将在视图重新渲染后调用
+    this.$nextTick(回调函数)
+    ```
+  - 说明
+    - 当改变数据后，要基于更新后的新DOM进行某些操作时，要在nextTick所指定的回调函数中执行。
+  - 例
+    ```html
+    <div id="root">
+      <div v-if="!showInput">{{ name }}</div>
+      <input v-else type="text" v-model="name" ref="inputTitle">
+      <button @click="EditName">编辑</button>
+    </div>
+    
+    <script>
+    new Vue({
+      el: '#root',
+      data() {
+        return {
+          name: 'zxr',
+          showInput: false
+        }
+      },
+      methods: {
+        EditName(){
+          this.showInput = true;
+          
+          this.$nextTick(function(){
+            // input 获取焦点（只有在视图渲染完成后调用，才能正确获得焦点）
+            this.$refs.inputTitle.focus()
+          })
+        }
+      },
     })
+    </script>
     ```
 
-## 
+
+
+## dfs
+
+
 

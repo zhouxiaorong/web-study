@@ -16,9 +16,10 @@
       props: Array<string> | Object
     })
   ```
+  
 - 对象参数说明
   - <i style="color: rgb(255,100,0)">type</i>
-    - <i style="color: rgb(00,100,255)">*String*、*Number*、*Boolean*、*Array*、*Object*、*Date*、*Function*、*Symbol*、任何自定义构造函数</i>
+    - <i style="color: rgb(00,100,255)">限制类型</i>：*String*、*Number*、*Boolean*、*Array*、*Object*、*Date*、*Function*、*Symbol*、任何自定义构造函数
     - 可以是由 <i style="color: rgb(00,100,255)">多个类型组成的数组</i>
     - 会检查一个 prop 是否是给定的类型，否则抛出警告
   - <i style="color: rgb(255,100,0)">default</i>
@@ -30,12 +31,20 @@
   - <i style="color: rgb(255,100,0)">validator：Function</i>
     - 自定义 <i style="color: rgb(00,100,255)">验证函数</i>  会将该 prop 的值作为唯一的参数代入。
     - 在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。
+  
 - 说明
+  - 可以只接收
   - 对象允许配置高级选项，如类型检测、自定义验证和设置默认值
   - 当 prop 验证失败的时候，(开发环境构建版本的) Vue 将会产生一个控制台的警告。
   -  prop 会在一个组件实例创建之前进行验证，所以实例的 property (如 data、computed 等) 在 default 或 validator 函数中是不可用的。
+  
 - 注意事项
+  
+  - props是 ***只读***  的
+    > Vue底层会监测你对props的修改，如果进行了修改，就会发出警告，若业务需求确实需要修改，那么请复制props的内容到data中一份，然后去修改data中的数据。
+  - props传过来的若是对象类型的值，修改对象中的属性时Vue不会报错，但不推荐这样做。
   - 对大小写不敏感，浏览器会把所有大写字符解释为小写字符。
+  
   - 当使用时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名(如果你使用字符串模板，那么这个限制就不存在了)
     ```html
       <div last-name="zhou"></div>
@@ -45,10 +54,24 @@
         })
       </script>
     ```
+  
   - 每次父级组件发生变更时，子组件中所有的 prop 都将会刷新为最新的值（不可以在子组件内部改变prop值）
+  
   - 对象和数组类型的值是通过*引用*传入的，在子组件中改变变更这个对象或数组本身将会影响到父组件的状态
+  
 - 例
+  - 只接收
+    
+    ```js
+    new Vue({
+      props: ['name', 'pwd']
+    })
+    ```
+    
+    
+    
   - 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+    
     ```js
       new Vue({
         props: {
@@ -56,6 +79,7 @@
         }
       })
     ```
+    
   - 多个可能的类型
     ```js
       new Vue({
@@ -64,6 +88,7 @@
         }
       })
     ```
+    
   - 自定义构造函数
     ```js
       function Person (firstName, lastName) {
@@ -76,6 +101,7 @@
         }
       })
     ```
+    
   - 必填的字符串
     ```js
       new Vue({
@@ -87,6 +113,7 @@
         }
       })
     ```
+    
   - 带有默认值的数字
     ```js
       new Vue({
@@ -99,6 +126,7 @@
         }
       })
     ```
+    
   - 带有默认值的对象
     ```js
       new Vue({
@@ -113,6 +141,7 @@
         }
       })
     ```
+    
   - 自定义验证函数
     ```js
       new Vue({
@@ -126,6 +155,7 @@
         }
       })
     ```
+    
   - prop需要作为一个本地的data数据使用时
     ```js
       new Vue({
@@ -137,6 +167,7 @@
         }
       })
     ```
+    
   - prop值需要计算改变时
     ```js
       new Vue({
@@ -148,6 +179,7 @@
         }
       })
     ```
+
 - 传递参数案例
   ```html
     <!-- 传入一个静态的值 -->
@@ -177,7 +209,7 @@
               company: 'Veridian Dynamics'
             }"
       ></child-component>
-  
+
     ``` 
   
     ```

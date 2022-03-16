@@ -306,8 +306,131 @@
 ## propsData
 
 ## parent
+
 ## mixins
-    - Vue.mixin();
+  - 语法
+    ```js
+      // 定义混合
+      var obj = {
+        data(){....},
+        methods:{....}
+        ....
+      }
+
+      // 使用全局混入
+      Vue.mixin(obj)
+      // 使用局部混入
+      new Vue({
+        mixins: [obj]
+      })
+    ```
+  - 说明
+    - 一个混入对象可以包含任意组件选项
+    - 可以把多个组件共用的配置提取成一个混入对象
+    - 当组件使用混入对象时，所有混入对象的选项将被 **混合** 进入该组件本身的选项
+  - 合并策略
+    - 当组件和混入对象含有同名选项时，数据对象在内部会进行递归合并，并在发生冲突时以组件数据优先
+      ```js
+      var mixin = {
+        data: function () {
+          return {
+            message: 'hello',
+            foo: 'abc'
+          }
+        }
+      }
+      new Vue({
+        mixins: [mixin],
+        data: function () {
+          return {
+            message: 'goodbye',
+            bar: 'def'
+          }
+        },
+        created: function () {
+          console.log(this.$data)
+          // => { message: "goodbye", foo: "abc", bar: "def" }
+        }
+      })
+      ```
+    - 同名钩子函数将合并为一个数组（都会被调用，混入对象优先调用）
+      ```js
+      var mixin = {
+        created: function () {
+          console.log('混入对象的钩子被调用')
+        }
+      }
+
+      new Vue({
+        mixins: [mixin],
+        created: function () {
+          console.log('组件钩子被调用')
+        }
+      })
+
+      // => "混入对象的钩子被调用"
+      // => "组件钩子被调用"
+      ```
+    - 值为对象的选项methods、components 和 directives等，将被合并为同一个对象（组件对象优先）
+      ```js
+      var mixin = {
+        methods: {
+          foo: function () {
+            console.log('foo')
+          },
+          conflicting: function () {
+            console.log('from mixin')
+          }
+        }
+      }
+
+      var vm = new Vue({
+        mixins: [mixin],
+        methods: {
+          bar: function () {
+            console.log('bar')
+          },
+          conflicting: function () {
+            console.log('from self')
+          }
+        }
+      })
+
+      vm.foo() // => "foo"
+      vm.bar() // => "bar"
+      vm.conflicting() // => "from self"
+      ```
+    - `Vue.extend()` 也使用同样的策略进行合并
+  - 单文件组件使用混入
+    - mixin.js
+      ```js
+      export const mixin = {
+        methods: {
+          showName(){
+            console.log('你好啊,'+ this.name +'！')
+          }
+        }
+      }
+      ```
+    - xxx.vue
+      ```vue
+      <script>
+      import {mixin} from '../mixin'
+          
+      // import {hunhe,hunhe2} from '../mixin'
+
+      export default {
+        name:'Student',
+        data() {
+          return {
+            name:'zxr',
+          }
+        },
+        mixins:[mixin]
+      }
+      </script>
+      ```
+
 ## extends
 ## provide / inject
 
@@ -330,6 +453,10 @@
 
 ## props
   > 用于接收来自父组件的数据
-  
+
+  - props适用于：
+    1. 父组件 ==> 子组件 通信
+    2. 子组件 ==> 父组件 通信（要求父先给子一个函数）
+
   - [组件间通信，父传子](vue-10-组件通信.md#父传子：props)
 
