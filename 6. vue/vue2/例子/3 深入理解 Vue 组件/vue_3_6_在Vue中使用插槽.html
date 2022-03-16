@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>在Vue中使用插槽（slot）</title>
-    <script src="/common/js/vue.js"></script>
+    <script src="../../vue.js"></script>
 
     <style>
         body, div, p {
@@ -26,7 +26,9 @@
         <body-content>
             <!-- slot: 插槽名字 -->
             <div class="header" slot="header">header</div>
+            <div class="text">text3</div>
             <div class="foooter" slot="footer">footer</div>
+            <p>Dell3</p>
         </body-content>
         
         <body-content></body-content>
@@ -48,6 +50,7 @@
                             <slot name="header"></slot>
                             <div class='content'>content</div>
                             <slot name="footer"></slot>
+                            <slot>默认内容</slot>
                         </div>`,
         })
 
