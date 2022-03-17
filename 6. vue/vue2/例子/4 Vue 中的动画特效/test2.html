@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中CSS动画原理</title>
+    <script src="../../vue.js"></script>
+    <!-- <link rel="stylesheet" href="https://raw.githubusercontent.com/julianshapiro/velocity/master/velocity.min.js" /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+    <style>
+      #root {
+        width: 100%;
+        margin-top: 200px;
+        text-align: center;
+      }
+    </style>
+</head>
+<body>
+    <div id="root">
+      <div id="example-2">
+        <button @click="show = !show">Toggle show</button>
+        <transition @enter="enterEnter" @leave="leaveEnter">
+          <p v-if="show" class="">11111</p>
+        </transition>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: '#example-2',
+        data: {
+          show: true
+        },
+        methods: {
+          leaveEnter(el, done){
+            Velocity(el, "slideUp", { duration: 300 }, { complete: done });
+          },
+          enterEnter(el, done){
+            Velocity(el, "slideDown", { duration: 300 }, { complete: done });
+          }
+        },
+      })
+    </script>
+</body>
+</html>

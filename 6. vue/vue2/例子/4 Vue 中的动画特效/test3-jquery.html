@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>velocity</title>
+    <style>
+      #root, .element {
+        width: 100%;
+        margin-top: 200px;
+        text-align: center;
+      }
+    </style>
+</head>
+<body>
+    <!-- dom -->
+    <div class="element">abcdefg</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+
+    <script>
+      // 标准写法
+      // (为了简洁，后面的示例代码中 将直接使用 $element 来代替 jQuery 选择器)
+      $(".element").velocity({
+          opacity: 0.5
+      }, {
+          duration: 1000
+      });
+
+      // $.animate() 的写法，效果同上
+      // $(".element").delay(1000).velocity({left: "200px"}, 450);
+    </script>
+</body>
+</html>
