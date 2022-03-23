@@ -27,19 +27,20 @@
 
     <script>
       new Vue({
-        el: '#example-2',
-        data: {
-          show: true
-        },
-        methods: {
-          leaveEnter(el, done){
-            Velocity(el, "slideUp", { duration: 300 }, { complete: done });
-          },
-          enterEnter(el, done){
-            Velocity(el, "slideDown", { duration: 300 }, { complete: done });
+        el: '',
+        data() {
+          return {
           }
         },
+        computed: {
+        },
+        methods: {
+        },
+        filters: {
+        },
+        components: [],
       })
+      console.air(Vue);
     </script>
 </body>
 </html>
