@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body, ul, li{margin:0px;padding: 0px;}
+    html,body {
+      height: 100%;
+    }
+    ul {
+      position: relative;
+      width: 800px;
+      height: 400px;
+      text-align: center;
+      margin: auto;
+      margin-top: 200px;
+      border: 2px solid blue;
+    }
+    li {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      list-style: none;
+      position: relative;
+      left: 100px;
+      top:33px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>
+    </li>
+  </ul>
+  <div class="box">
+
+  </div>
+  <script>
+
+    /** 兼容事件 */
+    function bind(element , eventStr , callback){
+      if(element.addEventListener){
+          //大部分浏览器
+          element.addEventListener(eventStr , callback , false);
+      }else{
+          //IE8及以下；有this指向问题
+          element.attachEvent("on"+eventStr , function(){
+              //在匿名函数中调用回调函数
+              callback.call(element);
+          });
+      }
+    }
+    function addFun(element, rangeEle){
+      var startLeft = Math.abs(element.offsetLeft);
+      var startTop = Math.abs(element.offsetTop);
+      rangeEle = document;
+      element.onmousedown = function(event){
+        event = event || window.event;
+        var disLeft = event.clientX - element.offsetLeft;
+        var disTop = event.clientY - element.offsetTop;
+        rangeEle.onmousemove = function(event){
+          event = event || window.event;
+          // console.log(event.screenX, event.screenY);
+          // var left = Math.max(0, Math.min(rangeEle.clientWidth - element.clientWidth, event.clientX - disLeft));
+          // var top = Math.max(0, Math.min(rangeEle.clientHeight - element.clientHeight, event.clientY - disTop));
+          element.style.left = event.clientX - disLeft + 'px';
+          element.style.top = event.clientY - disTop + 'px';
+        }
+        rangeEle.onmouseup = function(event){
+          rangeEle.onmousemove = undefined;
+          rangeEle.onmouseup = undefined;
+        }
+      }
+    }
+    addFun(document.getElementsByTagName('li')[0], document.getElementsByTagName('ul')[0]);
+
+  </script>
+</body>
+</html>

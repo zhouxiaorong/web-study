@@ -50,3 +50,19 @@
 ## npm 
   - 安装7版本less-loader: `npm i less-loader@7`
   - 查看所有版本：`npm view less-loader versions`
+
+## 前端项目的一些库
+  - `axios`: 发送 ajax
+    ```js
+    npm i axios --save
+    ```
+  - `mockjs`: 模拟后端接口，生成随机数据
+    ```js
+    npm i mockjs --save-dev
+    ```
+  - `json5`: 解决 json 文件，无法添加注释问题
+    ```js
+    // 文件后缀必须是 `.json5`
+    // 可以在里面添加注释
+    npm i json5 --save-dev
+    ```

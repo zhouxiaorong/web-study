@@ -241,7 +241,7 @@
     
 
 
-    
+​    
 ## filters
   > 过滤器
   - 语法
@@ -316,7 +316,7 @@
         methods:{....}
         ....
       }
-
+    
       // 使用全局混入
       Vue.mixin(obj)
       // 使用局部混入
@@ -360,14 +360,14 @@
           console.log('混入对象的钩子被调用')
         }
       }
-
+      
       new Vue({
         mixins: [mixin],
         created: function () {
           console.log('组件钩子被调用')
         }
       })
-
+      
       // => "混入对象的钩子被调用"
       // => "组件钩子被调用"
       ```
@@ -383,7 +383,7 @@
           }
         }
       }
-
+      
       var vm = new Vue({
         mixins: [mixin],
         methods: {
@@ -395,7 +395,7 @@
           }
         }
       })
-
+      
       vm.foo() // => "foo"
       vm.bar() // => "bar"
       vm.conflicting() // => "from self"
@@ -418,7 +418,7 @@
       import {mixin} from '../mixin'
           
       // import {hunhe,hunhe2} from '../mixin'
-
+      
       export default {
         name:'Student',
         data() {
@@ -443,12 +443,12 @@
 
 ## directives
   > 自定义指令
-  
+
   - [自定义指令](#自定义指令)
 
 ## components
   > 局部注册组件
-  
+
   - [组件](vue-6-组件.md)
 
 ## props
@@ -460,3 +460,72 @@
 
   - [组件间通信，父传子](vue-10-组件通信.md#父传子：props)
 
+
+## beforeRouteEnter
+  > 进入守卫；通过路由规则，进入该组件时被调用
+
+  - 语法
+    ```js
+    new Vue({
+      beforeRouteEnter (to, from, next) {},
+    })
+    ```
+  - 说明
+    - `to`: 路由对象；将要去往的路由的路由信息 [$route](#$route)
+    - `from`: 路由对象；当前的路由激活对象的路由信息 [$route](#$route)
+  - 注意事项 
+    - 不能访问 this （组件还没被创建）
+    - 支持给 next 传递回调的唯一守卫
+  - 例
+    - 访问组件实例；在导航被确认的时候执行回调
+      ```js
+      new Vue({
+      beforeRouteEnter (to, from, next) {
+        // vm: 组件实例
+        next(vm => {
+          ...
+        });
+      },
+      })
+      ```
+
+## beforeRouteUpdate
+  > 在当前路由改变，但是该组件被复用时调用  
+  > 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，  
+  > 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+
+  - 语法
+    ```js
+    new Vue({
+      beforeRouteUpdate (to, from, next) {},
+    })
+    ```
+  - 说明
+    - `to`: 路由对象；将要去往的路由的路由信息 [$route](#$route)
+    - `from`: 路由对象；当前的路由激活对象的路由信息 [$route](#$route)
+  - 说明
+    - 可以访问组件实例 `this`
+
+
+## beforeRouteLeave
+
+  > 离开守卫；通过路由规则，离开该组件时被调用
+  - 语法
+    ```js
+    new Vue({
+      beforeRouteLeave (to, from, next) {}
+    })
+    ```
+  - 说明
+    - `to`: 路由对象；将要去往的路由的路由信息 [$route](./vue-router.md#$route)
+    - `from`: 路由对象；当前的路由激活对象的路由信息 [$route](./vue-router.md#$route)
+    - 可以访问组件实例 `this`
+    - 通常用来禁止用户在还未保存修改前突然离开。该导航可以通过 next(false) 来取消。
+  - 例
+    ```js
+      beforeRouteLeave (to, from, next) {
+        // 禁止离开
+        next(false);
+      }
+    })
+    ```
